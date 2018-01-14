@@ -12,7 +12,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import reducers from './reducers'
-import UserRegister from './components/user_register'
+import UserCreate from './components/user_create'
+import UserLogin from './components/user_login'
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
 injectTapEventPlugin()
@@ -24,7 +25,8 @@ ReactDOM.render(
             <BrowserRouter>
                 <div>
                     <Switch>
-                        <Route path="/register" component={UserRegister} />
+                        <Route path="/register" component={UserCreate} />
+                        <Route path="/login" component={UserLogin} />
                     </Switch>
                 </div>
             </BrowserRouter>

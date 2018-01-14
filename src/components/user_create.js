@@ -2,8 +2,9 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-class UserRegister extends Component {
+class UserCreate extends Component {
     render() {
+        const { handleSubmit } = this.props
         return(
             <div>
                 <h1>User Sign Up</h1>
@@ -12,4 +13,4 @@ class UserRegister extends Component {
     }
 }
 
-export default UserRegister
+export default UserCreate
