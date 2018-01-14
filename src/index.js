@@ -14,6 +14,7 @@ import injectTapEventPlugin from 'react-tap-event-plugin'
 import reducers from './reducers'
 import UserCreate from './components/user_create'
 import UserLogin from './components/user_login'
+import Dashboard from './components/dashboard'
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
 injectTapEventPlugin()
@@ -27,6 +28,7 @@ ReactDOM.render(
                     <Switch>
                         <Route path="/register" component={UserCreate} />
                         <Route path="/login" component={UserLogin} />
+                        <Route path="/dashboard" component={Dashboard} />
                     </Switch>
                 </div>
             </BrowserRouter>
