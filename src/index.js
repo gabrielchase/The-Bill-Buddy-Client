@@ -12,6 +12,8 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
 import injectTapEventPlugin from 'react-tap-event-plugin'
 
 import reducers from './reducers'
+
+import LandingPage from './components/landing_page'
 import UserCreate from './components/user_create'
 import UserLogin from './components/user_login'
 import Dashboard from './components/dashboard'
@@ -29,6 +31,7 @@ ReactDOM.render(
                         <Route path="/register" component={UserCreate} />
                         <Route path="/login" component={UserLogin} />
                         <Route path="/dashboard" component={Dashboard} />
+                        <Route path="" component={LandingPage} />
                     </Switch>
                 </div>
             </BrowserRouter>
