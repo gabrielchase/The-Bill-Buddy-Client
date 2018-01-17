@@ -32,7 +32,7 @@ class Dashboard extends Component {
     }
 
     render() {
-        const { user, bills } = this.props
+        const { user } = this.props
         return (
             <div>
                 <h1>Dashboard</h1>
