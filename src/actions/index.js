@@ -7,6 +7,8 @@ export const LOGIN_USER_FAILURE = 'login_user_failure'
 export const CREATE_USER = 'create_user'
 export const FETCH_USER = 'fetch_user'
 
+export const FETCH_BILLS = 'fetch_bills'
+
 
 export function getHeaders(jwt) {
     return {
@@ -16,7 +18,6 @@ export function getHeaders(jwt) {
         }
     }
 }
-
 
 export async function createUser(values) {
     const res = await axios.post(`${LOCAL_ROOT_URL}/users/`, values)
@@ -43,6 +44,16 @@ export async function loginUser(values) {
     await localStorage.setItem('jwt', res.data.token)
     return {
         type: LOGIN_USER_SUCCESS, 
+        payload: res.data
+    }
+}
+
+export async function fetchBills() {
+    let jwt = localStorage.getItem('jwt')
+    let headers = getHeaders(jwt)
+    const res = await axios.get(`${LOCAL_ROOT_URL}/bills/`, headers)
+    return {
+        type: FETCH_BILLS, 
         payload: res.data
     }
 }
