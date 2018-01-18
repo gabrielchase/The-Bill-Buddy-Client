@@ -14,18 +14,13 @@ class Dashboard extends Component {
         await this.props.fetchBills()
     }
 
-    renderBills() {
-        return _.map(this.props.bills, bill => {
+    renderServices() {
+        return _.map(this.props.user.services, (service) => {
             return (
-                <div key={bill.id}>
-                    <Link to={`/bills/${bill.id}/`}>
-                        <p>{ bill.name }</p>
+                <div key={ service }>
+                    <Link to={`/services/${service}/`}>
+                        <p>{ service }</p>
                     </Link>
-                    <p>Description: { bill.description }</p>
-                    <p>Due on the { bill.due_date }th</p>
-                    <p>Service: { bill.service.name }</p>
-                    <p>By: { bill.user_details.email } / { bill.user_details.username } </p>
-                    <br/>
                 </div>
             )
         })
@@ -37,7 +32,7 @@ class Dashboard extends Component {
             <div>
                 <h1>Dashboard</h1>
                 <p>Welcome {user.first_name} {user.last_name}</p>
-                {this.renderBills()}
+                {this.renderServices()}
             </div>
         )
     }
