@@ -48,10 +48,16 @@ export async function loginUser(values) {
     }
 }
 
-export async function fetchBills() {
+export async function fetchBills(service_name=null) {
+    console.log(`fetchBills action: ${service_name}`)
     let jwt = localStorage.getItem('jwt')
     let headers = getHeaders(jwt)
-    const res = await axios.get(`${LOCAL_ROOT_URL}/bills/`, headers)
+    let api_url = `${LOCAL_ROOT_URL}/bills/`
+    if (service_name) {
+        api_url += `?service=${service_name}`
+    } 
+    console.log(api_url)
+    const res = await axios.get(api_url, headers)
     return {
         type: FETCH_BILLS, 
         payload: res.data

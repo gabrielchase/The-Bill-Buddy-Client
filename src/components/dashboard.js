@@ -11,7 +11,6 @@ import _ from 'lodash'
 class Dashboard extends Component {
     async componentDidMount() {
         await this.props.fetchUser()
-        await this.props.fetchBills()
     }
 
     renderServices() {
