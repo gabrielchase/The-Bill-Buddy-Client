@@ -4,6 +4,11 @@ import { Link } from 'react-router-dom'
 
 
 class Navbar extends Component {
+    async handleLogout() {
+        await localStorage.removeItem('user_id')
+        await localStorage.removeItem('jwt')
+    }
+
     render() {
         const { user } = this.props
         if (user.id) {
@@ -11,7 +16,7 @@ class Navbar extends Component {
                 <div>
                     <Link to="/dashboard"><p>Dashboard</p></Link>
                     <Link to="/bills/new"><p>New Bill</p></Link>
-                    <Link to="/logout"><p>Logout</p></Link>
+                    <a href="/" onClick={this.handleLogout.bind(this)}><p>Logout</p></a>
                 </div>
             )
         } else {
