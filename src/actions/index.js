@@ -8,12 +8,13 @@ export const CREATE_USER = 'create_user'
 export const FETCH_USER = 'fetch_user'
 
 export const FETCH_BILLS = 'fetch_bills'
+export const CREATE_BILL = 'create_bill'
 
 
-export function getHeaders(jwt) {
+export function getHeaders() {
     return {
         headers: {
-            'Authorization': `JWT ${jwt}`,
+            'Authorization': `JWT ${localStorage.getItem('jwt')}`,
             'Content-Type' : 'application/json'
         }
     }
@@ -29,8 +30,7 @@ export async function createUser(values) {
 
 export async function fetchUser() {
     let user_id = localStorage.getItem('user_id')
-    let jwt = localStorage.getItem('jwt')
-    let headers = getHeaders(jwt)
+    let headers = getHeaders()
     const res = await axios.get(`${LOCAL_ROOT_URL}/users/${user_id}/`, headers)
     return {
         type: FETCH_USER, 
@@ -49,17 +49,23 @@ export async function loginUser(values) {
 }
 
 export async function fetchBills(service_name=null) {
-    console.log(`fetchBills action: ${service_name}`)
-    let jwt = localStorage.getItem('jwt')
-    let headers = getHeaders(jwt)
+    let headers = getHeaders()
     let api_url = `${LOCAL_ROOT_URL}/bills/`
     if (service_name) {
         api_url += `?service=${service_name}`
     } 
-    console.log(api_url)
     const res = await axios.get(api_url, headers)
     return {
         type: FETCH_BILLS, 
+        payload: res.data
+    }
+}
+
+export async function createBill(values) {
+    let headers = getHeaders()
+    const res = await axios.post(`${LOCAL_ROOT_URL}/bills/`, values, headers)
+    return {
+        type: CREATE_BILL, 
         payload: res.data
     }
 }
