@@ -27,7 +27,6 @@ class ServiceBills extends Component {
     }
 
     render() {
-        let { bills } = this.props
         let { service_name } = this.props.match.params
         return (
             <div>
