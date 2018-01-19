@@ -7,23 +7,26 @@ import _ from 'lodash'
 
 
 class ServiceBills extends Component {
-    componentDidMount() {
+    async componentDidMount() {
         let { service_name } = this.props.match.params
-        console.log(`ServiceBills mounted\nservice_name: ${service_name}`)
-        this.props.fetchBills(service_name)
+        await this.props.fetchBills(service_name)
     }
 
     renderBills() {
-        return _.map(this.props.bills, (bill) => {
-            return (
-                <div key={ bill.id }>
-                    <p><strong>Name: { bill.name }</strong></p>
-                    <p>Description: { bill.description }</p>
-                    <p>Due Date: { bill.due_date}</p>  
-                    <br/>
-                </div>
-            )
-        })
+        if (this.props.bills) {
+            return _.map(this.props.bills, (bill) => {
+                return (
+                    <div key={ bill.id ? bill.id : bill }>
+                        <p><strong>Name: { bill.name }</strong></p>
+                        <p>Description: { bill.description }</p>
+                        <p>Due Date: { bill.due_date }</p>  
+                        <br/>
+                    </div>
+                )
+            })
+        } else {
+            return(<div></div>)
+        }
     }
 
     render() {
