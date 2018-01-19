@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-// import { loginUser } from '../actions'
+import { createBill } from '../actions'
 
 
 class BillNew extends Component {
@@ -19,11 +19,13 @@ class BillNew extends Component {
     }
 
     async onSubmit(values) {
-        let service_name = values.service 
+        let service_name = values.service.toLowerCase()
+        service_name = service_name.charAt(0).toUpperCase() + service_name.slice(1)
         values.service = {
             name: service_name
         }
-        console.log('Submitting: ', values)
+        await this.props.createBill(values)
+        await this.props.history.push(`/services/${service_name}`)
     }
 
     render() {
@@ -65,7 +67,19 @@ function validate(values) {
     let errors = {}
 
     if (!values.name) {
-        errors.email = 'Enter name of bill'
+        errors.name = 'Enter name of bill'
+    }
+
+    if (!values.description) {
+        errors.description = 'Enter a small description about the bill'
+    }
+
+    if (!values.due_date) {
+        errors.due_date = 'Date of every month your bill is due'
+    }
+
+    if (!values.service) {
+        errors.service = 'Please fill this up to better track your bills'
     }
 
     return errors
@@ -75,5 +89,5 @@ export default reduxForm({
     validate,
     form: 'BillNewForm'
 })(
-    connect(null, {  })(BillNew)
+    connect(null, { createBill })(BillNew)
 )
