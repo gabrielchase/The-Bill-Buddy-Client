@@ -30,8 +30,11 @@ class Dashboard extends Component {
         return (
             <div>
                 <h1>Dashboard</h1>
-                <p>Welcome {user.first_name} {user.last_name}</p>
-                {this.renderServices()}
+                <h4>Welcome {user.first_name} {user.last_name}</h4>
+                <h4>Services:</h4>
+                <ul>
+                    {this.renderServices()}
+                </ul>
             </div>
         )
     }
