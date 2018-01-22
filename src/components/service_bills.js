@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { fetchBills } from '../actions'
 
@@ -13,14 +14,14 @@ class ServiceBills extends Component {
     }
 
     renderBills() {
+        let { service_name } = this.props.match.params
         if (this.props.bills) {
             return _.map(this.props.bills, (bill) => {
                 return (
                     <div key={ bill.id ? bill.id : bill }>
-                        <p><strong>Name: { bill.name }</strong></p>
-                        <p>Description: { bill.description }</p>
-                        <p>Due Date: { bill.due_date }</p>  
-                        <br/>
+                        <Link to={`/services/${service_name}/bills/${bill.name}`}>
+                            <p>{ bill.name }</p>
+                        </Link>
                     </div>
                 )
             })
