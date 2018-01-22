@@ -24,8 +24,10 @@ class Navbar extends Component {
             return (
                 <div className="container">
                     <li><Link to="">Home</Link></li>
-                    <li><Link to="/register">Register</Link></li>
-                    <li><Link to="/login">Login</Link></li>
+                    <div className="float-right">
+                        <li><Link to="/register">Register</Link></li>
+                        <li><Link to="/login">Login</Link></li>
+                    </div>
                 </div>
             )
         }
