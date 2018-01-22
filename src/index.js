@@ -34,7 +34,7 @@ ReactDOM.render(
                 <div>
                     <Navbar />
                     <br/>
-                    <div class="container">
+                    <div className="container">
                         <Switch>
                             <Route path="/services/:service_name/bills/:bill_id/payments" component={BillPayments} />
                             <Route path="/services/:service_name/bills" component={ServiceBills} />

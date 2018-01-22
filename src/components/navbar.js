@@ -12,7 +12,7 @@ class Navbar extends Component {
     renderLinks() {
         if (localStorage.getItem('jwt')) {
             return(
-                <div class="container">
+                <div className="container">
                     <li><Link to="/dashboard">Dashboard</Link></li>
                     <li><Link to="/bills/new">New Bill</Link></li>
                     <div className="float-right">
@@ -22,7 +22,7 @@ class Navbar extends Component {
             )
         } else {
             return (
-                <div class="container">
+                <div className="container">
                     <li><Link to="">Home</Link></li>
                     <li><Link to="/register">Register</Link></li>
                     <li><Link to="/login">Login</Link></li>
@@ -33,7 +33,7 @@ class Navbar extends Component {
 
     render() {
         return (
-            <div class="navbar">
+            <div className="navbar">
                 <ul>
                     {this.renderLinks()}
                 </ul>

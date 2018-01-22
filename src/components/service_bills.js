@@ -20,7 +20,7 @@ class ServiceBills extends Component {
                 return (
                     <div key={ bill.id ? bill.id : bill }>
                         <Link to={`/services/${service_name}/bills/${bill.id}/payments`}>
-                            <p>{ bill.name }</p>
+                            { bill.name }
                         </Link>
                     </div>
                 )
