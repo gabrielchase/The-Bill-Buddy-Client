@@ -10,8 +10,7 @@ class Navbar extends Component {
     }
 
     render() {
-        const { user } = this.props
-        if (user.id) {
+        if (localStorage.getItem('jwt')) {
             return (
                 <div>
                     <Link to="/dashboard"><p>Dashboard</p></Link>
@@ -32,10 +31,4 @@ class Navbar extends Component {
     }
 }
 
-function mapStateToProps(state) {
-    return { 
-        user: state.user
-    }
-}
-
-export default connect(mapStateToProps, { })(Navbar)
+export default Navbar
