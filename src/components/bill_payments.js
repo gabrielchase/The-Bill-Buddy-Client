@@ -23,7 +23,7 @@ class BillPayments extends Component {
         if (current_bill) {
             return _.map(current_bill.payments, (payment) => {
                 return(
-                    <div>
+                    <div key={payment.id}>
                         <p>Amount: {payment.amount}</p>
                         <p>Due date: {payment.due_date}</p>
                         <p>Status: {payment.status}</p>
