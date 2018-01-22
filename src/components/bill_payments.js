@@ -41,7 +41,6 @@ class BillPayments extends Component {
     }
 
     render() {
-        console.log(this.props.bills)
         return (
             <div>
                 <h1>Bill Payments</h1>

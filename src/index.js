@@ -20,6 +20,7 @@ import Dashboard from './components/dashboard'
 import ServiceBills from './components/service_bills'
 import BillPayments from './components/bill_payments'
 import BillNew from './components/bill_new'
+import PaymentNew from './components/payment_new'
 import Navbar from './components/navbar'
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
@@ -36,6 +37,7 @@ ReactDOM.render(
                         <Route path="/services/:service_name/bills/:bill_id/payments" component={BillPayments} />
                         <Route path="/services/:service_name/bills" component={ServiceBills} />
                         <Route path="/bills/new" component={BillNew} />
+                        <Route path="/payment/new" component={PaymentNew} />
                         <Route path="/register" component={UserCreate} />
                         <Route path="/login" component={UserLogin} />
                         <Route path="/dashboard" component={Dashboard} />
