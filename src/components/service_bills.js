@@ -19,7 +19,7 @@ class ServiceBills extends Component {
             return _.map(this.props.bills, (bill) => {
                 return (
                     <div key={ bill.id ? bill.id : bill }>
-                        <Link to={`/services/${service_name}/bills/${bill.name}/payments`}>
+                        <Link to={`/services/${service_name}/bills/${bill.id}/payments`}>
                             <p>{ bill.name }</p>
                         </Link>
                     </div>
@@ -43,7 +43,8 @@ class ServiceBills extends Component {
 
 function mapStateToProps(state) {
     return {
-        bills: state.bills
+        bills: state.bills,
+        user: state.user
     }
 }
 

@@ -33,7 +33,7 @@ ReactDOM.render(
                 <div>
                     <Navbar />
                     <Switch>
-                        <Route path="/services/:service_name/bills/:bill_name/payments" component={BillPayments} />
+                        <Route path="/services/:service_name/bills/:bill_id/payments" component={BillPayments} />
                         <Route path="/services/:service_name/bills" component={ServiceBills} />
                         <Route path="/bills/new" component={BillNew} />
                         <Route path="/register" component={UserCreate} />
