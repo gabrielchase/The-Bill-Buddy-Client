@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { fetchBills } from '../actions'
+import { fetchBills, createPayment } from '../actions'
 
 import _ from 'lodash'
 
@@ -75,7 +75,7 @@ class PaymentNew extends Component {
     }
 
     async onSubmit(values) {
-        console.log(values)
+        await this.props.createPayment(values)
     }
 
     render() {
@@ -160,6 +160,6 @@ export default reduxForm({
     validate,
     form: 'PaymentNewForm'
 })(
-    connect(mapStateToProps, { fetchBills })(PaymentNew)
+    connect(mapStateToProps, { fetchBills, createPayment })(PaymentNew)
 )
 
