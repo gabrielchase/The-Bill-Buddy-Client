@@ -9,25 +9,36 @@ class Navbar extends Component {
         await localStorage.removeItem('jwt')
     }
 
-    render() {
+    renderLinks() {
         if (localStorage.getItem('jwt')) {
-            return (
-                <div>
-                    <Link to="/dashboard"><p>Dashboard</p></Link>
-                    <Link to="/bills/new"><p>New Bill</p></Link>
-                    <a href="/" onClick={this.handleLogout.bind(this)}><p>Logout</p></a>
+            return(
+                <div class="container">
+                    <li><Link to="/dashboard">Dashboard</Link></li>
+                    <li><Link to="/bills/new">New Bill</Link></li>
+                    <div className="float-right">
+                        <li><a href="/" onClick={this.handleLogout.bind(this)}>Logout</a></li>
+                    </div>
                 </div>
             )
         } else {
             return (
-                <div>
-                    <Link to=""><p>Home</p></Link>
-                    <Link to="/register"><p>Register</p></Link>
-                    <Link to="/login"><p>Login</p></Link>
+                <div class="container">
+                    <li><Link to="">Home</Link></li>
+                    <li><Link to="/register">Register</Link></li>
+                    <li><Link to="/login">Login</Link></li>
                 </div>
             )
         }
-        
+    }
+
+    render() {
+        return (
+            <div class="navbar">
+                <ul>
+                    {this.renderLinks()}
+                </ul>
+            </div>
+        )
     }
 }
 
