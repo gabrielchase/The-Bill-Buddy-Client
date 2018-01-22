@@ -1,14 +1,14 @@
 import React, { Component } from 'react'
 
 
-class BillsIndex extends Component {
+class BillPayments extends Component {
     render() {
         return (
             <div>
-                <h1>Bills Index</h1>
+                <h1>Bill Payments</h1>
             </div>
         )
     }
 }
 
-export default BillsIndex 
+export default BillPayments 
