@@ -96,19 +96,19 @@ function validate(values) {
     let errors = {}
 
     if (!values.first_name) {
-        errors.first_name = 'Enter your first name'
+        errors.first_name = <p className="form-errors">Enter your first name</p>
     }
 
     if (!values.last_name) {
-        errors.last_name = 'Enter your last name'
+        errors.last_name = <p className="form-errors">Enter your last name</p>
     }
 
     if (!values.email) {
-        errors.email = 'Enter an email'
+        errors.email = <p className="form-errors">Enter an email</p>
     }
 
     if (!values.password) {
-        errors.password = 'Enter a password'
+        errors.password = <p className="form-errors">Enter a password</p>
     }
 
     return errors

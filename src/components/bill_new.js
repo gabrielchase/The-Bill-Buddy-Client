@@ -67,19 +67,19 @@ function validate(values) {
     let errors = {}
 
     if (!values.name) {
-        errors.name = 'Enter name of bill'
+        errors.name = <p className="form-errors">Enter name of bill</p>
     }
 
     if (!values.description) {
-        errors.description = 'Enter a small description about the bill'
+        errors.description = <p className="form-errors">Enter a small description about the bill</p>
     }
 
     if (!values.due_date) {
-        errors.due_date = 'Date of every month your bill is due'
+        errors.due_date = <p className="form-errors">Date of every month your bill is due</p>
     }
 
     if (!values.service) {
-        errors.service = 'Please fill this up to better track your bills'
+        errors.service = <p className="form-errors">Please fill this up to better track your bills</p>
     }
 
     return errors
