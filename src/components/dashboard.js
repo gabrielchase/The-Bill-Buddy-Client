@@ -17,7 +17,7 @@ class Dashboard extends Component {
         return _.map(this.props.user.services, (service) => {
             return (
                 <div key={ service }>
-                    <Link to={`/services/${service}/`}>
+                    <Link to={`/services/${service}/bills`}>
                         <p>{ service }</p>
                     </Link>
                 </div>

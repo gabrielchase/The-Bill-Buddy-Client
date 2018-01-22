@@ -19,7 +19,7 @@ class ServiceBills extends Component {
             return _.map(this.props.bills, (bill) => {
                 return (
                     <div key={ bill.id ? bill.id : bill }>
-                        <Link to={`/services/${service_name}/bills/${bill.name}`}>
+                        <Link to={`/services/${service_name}/bills/${bill.name}/payments`}>
                             <p>{ bill.name }</p>
                         </Link>
                     </div>

@@ -18,7 +18,7 @@ import UserCreate from './components/user_create'
 import UserLogin from './components/user_login'
 import Dashboard from './components/dashboard'
 import ServiceBills from './components/service_bills'
-import BillsIndex from './components/bills_index'
+import BillPayments from './components/bill_payments'
 import BillNew from './components/bill_new'
 import Navbar from './components/navbar'
 
@@ -33,8 +33,8 @@ ReactDOM.render(
                 <div>
                     <Navbar />
                     <Switch>
-                        <Route path="/services/:service_name/bills/:bill_name" component={BillsIndex} />
-                        <Route path="/services/:service_name" component={ServiceBills} />
+                        <Route path="/services/:service_name/bills/:bill_name/payments" component={BillPayments} />
+                        <Route path="/services/:service_name/bills" component={ServiceBills} />
                         <Route path="/bills/new" component={BillNew} />
                         <Route path="/register" component={UserCreate} />
                         <Route path="/login" component={UserLogin} />
