@@ -1,25 +1,19 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 
-import { fetchBills } from '../actions'
+import { fetchCurrentBill } from '../actions'
 
 import _ from 'lodash'
 
 
 class BillPayments extends Component {
     async componentDidMount() {
-        let { service_name } = this.props.match.params
-        await this.props.fetchBills(service_name)
+        let { bill_id } = this.props.match.params
+        await this.props.fetchCurrentBill(bill_id)
     }
 
     renderPayments() {
-        let { bill_id } = this.props.match.params
-        bill_id = parseInt(bill_id)
-        
-        let current_bill = _.find(this.props.bills, (bill) => {
-            return bill.id === bill_id
-        })
-        
+        let { current_bill } = this.props
         if (current_bill) {
             return _.map(current_bill.payments, (payment) => {
                 return(
@@ -41,9 +35,12 @@ class BillPayments extends Component {
     }
 
     render() {
+        let { current_bill } = this.props
         return (
             <div>
-                <h1>Bill Payments</h1>
+                <h1>{current_bill.name} Payments</h1>
+                <h4>Description: {current_bill.description}</h4>
+                <br/>
                 {this.renderPayments()}
             </div>
         )
@@ -52,9 +49,8 @@ class BillPayments extends Component {
 
 function mapStateToProps(state) {
     return {
-        bills: state.bills
+        current_bill: state.current_bill
     }
 }
 
-export default connect(mapStateToProps, { fetchBills })(BillPayments)
-
+export default connect(mapStateToProps, { fetchCurrentBill })(BillPayments)
