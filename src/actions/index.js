@@ -8,6 +8,7 @@ export const CREATE_USER = 'create_user'
 export const FETCH_USER = 'fetch_user'
 
 export const FETCH_BILLS = 'fetch_bills'
+export const FETCH_CURRENT_BILL = 'fetch_current_bill'
 export const CREATE_BILL = 'create_bill'
 
 export const CREATE_PAYMENT = 'create_payment'
@@ -61,6 +62,15 @@ export async function fetchBills(service_name=null) {
     const res = await axios.get(api_url, headers)
     return {
         type: FETCH_BILLS, 
+        payload: res.data
+    }
+}
+
+export async function fetchCurrentBill(bill_id=null) {
+    let headers = getHeaders()
+    const res = await axios.get(`${LOCAL_ROOT_URL}/bills/${bill_id}/`, headers)
+    return {
+        type: FETCH_CURRENT_BILL,
         payload: res.data
     }
 }
