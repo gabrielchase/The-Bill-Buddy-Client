@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { fetchCurrentBill } from '../actions'
 
@@ -40,6 +41,9 @@ class BillPayments extends Component {
             <div>
                 <h1>{current_bill.name} Payments</h1>
                 <h4>Description: {current_bill.description}</h4>
+                <div className="float-right">
+                    <Link className="button" to="/payment/new"> Add a New Payment </Link>
+                </div>
                 <br/>
                 {this.renderPayments()}
             </div>
