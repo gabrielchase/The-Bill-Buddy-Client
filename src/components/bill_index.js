@@ -25,11 +25,10 @@ class BillIndex extends Component {
 
     renderServicesBills() {
         let { services } = this.props
-        console.log(services)
         if (services) {
             return _.map(services, (service) => {
                 return (
-                    <div className="column column-50" key={ service.id ? service.id : service }>
+                    <div className="column column-100" key={ service.id ? service.id : service }>
                         <h4>{ service.name }</h4>
                         <ul>
                             {this.renderBills(service.name, service.bills)}
