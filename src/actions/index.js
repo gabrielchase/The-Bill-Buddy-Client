@@ -12,6 +12,8 @@ export const CREATE_BILL = 'create_bill'
 
 export const CREATE_PAYMENT = 'create_payment'
 
+export const FETCH_SERVICES = 'fetch_services'
+
 
 export function getHeaders() {
     return {
@@ -77,6 +79,16 @@ export async function createPayment(values) {
     const res = await axios.post(`${LOCAL_ROOT_URL}/payments/`, values, headers)
     return {
         type: CREATE_PAYMENT, 
+        payload: res.data
+    }
+}
+
+export async function fetchServices() {
+    let headers = getHeaders()
+    let api_url = `${LOCAL_ROOT_URL}/services/`
+    const res = await axios.get(api_url, headers)
+    return {
+        type: FETCH_SERVICES, 
         payload: res.data
     }
 }
