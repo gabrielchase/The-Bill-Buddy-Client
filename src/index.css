@@ -40,8 +40,3 @@ html * {
 .form-errors {
     color: #DD3999
 }
-
-#containerIntro h1 {
-    display: inline;
-    vertical-align: top;
-}
