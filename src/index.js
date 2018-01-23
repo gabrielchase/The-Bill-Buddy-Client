@@ -17,7 +17,7 @@ import LandingPage from './components/landing_page'
 import UserCreate from './components/user_create'
 import UserLogin from './components/user_login'
 import Dashboard from './components/dashboard'
-import ServiceBills from './components/service_bills'
+import BillIndex from './components/bill_index'
 import BillPayments from './components/bill_payments'
 import BillNew from './components/bill_new'
 import PaymentNew from './components/payment_new'
@@ -36,9 +36,9 @@ ReactDOM.render(
                     <br/>
                     <div className="container">
                         <Switch>
-                            <Route path="/services/:service_name/bills/:bill_id/payments" component={BillPayments} />
-                            <Route path="/services/:service_name/bills" component={ServiceBills} />
+                            <Route path="/bills/:bill_id/payments" component={BillPayments} />
                             <Route path="/bills/new" component={BillNew} />
+                            <Route path="/bills" component={BillIndex} />
                             <Route path="/payment/new" component={PaymentNew} />
                             <Route path="/register" component={UserCreate} />
                             <Route path="/login" component={UserLogin} />
