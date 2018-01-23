@@ -13,28 +13,12 @@ class Dashboard extends Component {
         await this.props.fetchUser()
     }
 
-    renderServices() {
-        return _.map(this.props.user.services, (service) => {
-            return (
-                <div key={ service }>
-                    <Link to={`/services/${service}/bills`}>
-                        <p>{ service }</p>
-                    </Link>
-                </div>
-            )
-        })
-    }
-
     render() {
         const { user } = this.props
         return (
             <div>
                 <h1>Dashboard</h1>
                 <h4>Welcome {user.first_name} {user.last_name}</h4>
-                <h4>Services:</h4>
-                <ul>
-                    {this.renderServices()}
-                </ul>
             </div>
         )
     }

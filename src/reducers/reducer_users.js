@@ -6,7 +6,6 @@ export default function(state = {}, action) {
     case CREATE_USER: 
         return action.payload
     case FETCH_USER:
-        console.log('adlkfjsldfj')
         return action.payload
     default: 
         return state
