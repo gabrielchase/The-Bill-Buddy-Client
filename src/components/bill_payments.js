@@ -39,9 +39,6 @@ class BillPayments extends Component {
         let { current_bill } = this.props
         return (
             <div>
-                <div className="float-right">
-                    <Link className="button" to="/payment/new"> Add a New Payment </Link>
-                </div>
                 <h1>{current_bill.name} Payments</h1>
                 <h4>Description: {current_bill.description}</h4>
                 <br/>

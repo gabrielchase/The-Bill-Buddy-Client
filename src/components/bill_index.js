@@ -44,11 +44,7 @@ class BillIndex extends Component {
     render() {
         return (
             <div>
-                <div className="float-right">
-                    <Link className="button" to="/bills/new"> Add a New Bill </Link>
-                </div>
                 <h1>My Bills</h1>
-                
                 <br/>
                 <div className="row">
                     {this.renderServicesBills()}
