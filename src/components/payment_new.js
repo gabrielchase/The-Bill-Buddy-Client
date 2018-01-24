@@ -40,9 +40,9 @@ class PaymentNew extends Component {
 
     renderBillField(field) {
         if (field.bills) {
-            let options = _.map(field.bills, (bill) => {
+            let options = _.map(field.bills, (bill, field) => {
                 return (
-                    <option key={bill.id} value={bill.id}>{bill.name}</option>
+                    <option key={bill.id ? bill.id : field} value={bill.id}>{bill.name}</option>
                 )
             })
             
@@ -80,7 +80,7 @@ class PaymentNew extends Component {
             return bill.id === parseInt(values.bill_id)
         })
         await this.props.createPayment(values)
-        await this.props.history.push(`/services/${bill.service.name}/bills/${bill.id}/payments`)
+        await this.props.history.push(`/bills/${bill.id}/payments`)
     }
 
     render() {
