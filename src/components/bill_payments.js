@@ -18,18 +18,18 @@ class BillPayments extends Component {
         if (current_bill) {
             return _.map(current_bill.payments, (payment) => {
                 return(
-                    <div key={payment.id}>
-                        <p>Amount: {payment.amount}</p>
-                        <p>Due date: {payment.due_date}</p>
-                        <p>Status: {payment.status}</p>
-                        <p>Additional Notes: {payment.additional_notes}</p>
-                        <br/>
-                    </div>
+                    <tr key={payment.id}>
+                        <td>{payment.amount}</td>
+                        <td>{payment.due_date}</td>
+                        <td>{payment.status}</td>
+                        <td>{payment.date_paid}</td>
+                        <td>{payment.additional_notes}</td>
+                    </tr>
                 )
             })
         } else {
             return(
-                <div></div>
+                <tr></tr>
             )
         }
         
@@ -45,7 +45,20 @@ class BillPayments extends Component {
                 <h1>{current_bill.name} Payments</h1>
                 <h4>Description: {current_bill.description}</h4>
                 <br/>
-                {this.renderPayments()}
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Amount</th>
+                            <th>Due Date</th>
+                            <th>Status</th>
+                            <th>Date Paid</th>
+                            <th>Notes</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {this.renderPayments()}
+                    </tbody>
+                </table>
             </div>
         )
     }
