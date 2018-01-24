@@ -19,13 +19,12 @@ class BillNew extends Component {
     }
 
     async onSubmit(values) {
-        let service_name = values.service.toLowerCase()
+        let service_name = values.service_name.toLowerCase()
         service_name = service_name.charAt(0).toUpperCase() + service_name.slice(1)
-        values.service = {
-            name: service_name
-        }
+        
+        values.service_name = service_name
         await this.props.createBill(values)
-        await this.props.history.push(`/services/${service_name}`)
+        await this.props.history.push('/bills')
     }
 
     render() {
@@ -52,7 +51,7 @@ class BillNew extends Component {
                     component={this.renderField}
                 />
                 <Field 
-                    name="service"
+                    name="service_name"
                     label="Service"
                     type="text"
                     component={this.renderField}
@@ -78,7 +77,7 @@ function validate(values) {
         errors.due_date = <p className="form-errors">Date of every month your bill is due</p>
     }
 
-    if (!values.service) {
+    if (!values.service_name) {
         errors.service = <p className="form-errors">Please fill this up to better track your bills</p>
     }
 
