@@ -73,10 +73,6 @@ function validate(values) {
         errors.description = <p className="form-errors">Enter a small description about the bill</p>
     }
 
-    if (!values.due_date) {
-        errors.due_date = <p className="form-errors">Date of every month your bill is due</p>
-    }
-
     if (!values.service_name) {
         errors.service = <p className="form-errors">Please fill this up to better track your bills</p>
     }
