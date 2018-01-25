@@ -16,6 +16,7 @@ import reducers from './reducers'
 import LandingPage from './components/landing_page'
 import UserCreate from './components/user_create'
 import UserLogin from './components/user_login'
+import UserUpdate from './components/user_update'
 import Dashboard from './components/dashboard'
 import BillIndex from './components/bill_index'
 import BillPayments from './components/bill_payments'
@@ -40,6 +41,7 @@ ReactDOM.render(
                             <Route path="/bills/new" component={BillNew} />
                             <Route path="/bills" component={BillIndex} />
                             <Route path="/payment/new" component={PaymentNew} />
+                            <Route path="/profile/edit" component={UserUpdate} />
                             <Route path="/register" component={UserCreate} />
                             <Route path="/login" component={UserLogin} />
                             <Route path="/dashboard" component={Dashboard} />

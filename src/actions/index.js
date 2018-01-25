@@ -43,6 +43,11 @@ export async function fetchUser() {
     }
 }
 
+export async function updateUser(values) {
+    console.log('in updateUser')
+    console.log(values)
+}
+
 export async function loginUser(values) {
     const res = await axios.post(`${LOCAL_ROOT_URL}/login/`, values)
     await localStorage.setItem('user_id', res.data.user_id)
