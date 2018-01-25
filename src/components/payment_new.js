@@ -40,10 +40,16 @@ class PaymentNew extends Component {
 
     renderBillField(field) {
         if (field.bills) {
-            let options = _.map(field.bills, (bill, field) => {
-                return (
-                    <option key={bill.id ? bill.id : field} value={bill.id}>{bill.name}</option>
-                )
+            let options = _.map(field.bills, (bill) => {
+                if (bill) {
+                    return (
+                        <option key={bill.id} value={bill.id}>{bill.name}</option>
+                    )
+                } else {
+                    return (
+                        <option value=""></option>
+                    )
+                }
             })
             
             return (
