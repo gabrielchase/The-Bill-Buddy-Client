@@ -1,5 +1,4 @@
 import { FETCH_BILLS, CREATE_BILL, CREATE_PAYMENT } from '../actions'
-import _ from 'lodash'
 
 
 export default function(state = {}, action) {
