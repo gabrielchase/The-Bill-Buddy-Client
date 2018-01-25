@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import { Field, reduxForm, initialize } from 'redux-form'
+import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
 import { fetchUser, updateUser } from '../actions'
@@ -37,7 +37,15 @@ class UserUpdate extends Component {
     }
 
     async onSubmit(values) {
-        this.props.updateUser(values)
+        values.details = {
+            country: values.country,
+            mobile_number: values.mobile_number
+        }
+        delete values.country
+        delete values.mobile_number
+        
+        await this.props.updateUser(values)
+        await this.props.history.push('/dashboard')
     }
 
     render() {

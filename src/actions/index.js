@@ -44,8 +44,13 @@ export async function fetchUser() {
 }
 
 export async function updateUser(values) {
-    console.log('in updateUser')
-    console.log(values)
+    let user_id = localStorage.getItem('user_id')
+    let headers = getHeaders()
+    const res = await axios.put(`${LOCAL_ROOT_URL}/users/${user_id}/`, values, headers)
+    return {
+        type: FETCH_USER, 
+        payload: res.data
+    }
 }
 
 export async function loginUser(values) {
