@@ -16,9 +16,10 @@ class BillPayments extends Component {
     renderPayments() {
         let { current_bill } = this.props
         if (current_bill) {
-            return _.map(current_bill.payments, (payment) => {
+            return _.map(current_bill.payments, (payment, idx) => {
                 return(
                     <tr key={payment.id}>
+                        <td>{idx+1}</td>
                         <td>{payment.amount}</td>
                         <td>{payment.due_date}</td>
                         <td>{payment.status}</td>
@@ -50,6 +51,7 @@ class BillPayments extends Component {
                 <table>
                     <thead>
                         <tr>
+                            <th></th>
                             <th>Amount</th>
                             <th>Due Date</th>
                             <th>Status</th>
