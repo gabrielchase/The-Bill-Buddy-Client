@@ -9,7 +9,19 @@ class BillUpdate extends Component {
     async componentDidMount() {
         let { bill_id } = this.props.match.params
         await this.props.fetchCurrentBill(bill_id)
+        await this.handleInitialize()
     }
+
+    handleInitialize() {
+        let { current_bill } = this.props
+        let initial_values = {
+          'name': current_bill.name,
+          'description': current_bill.description,
+          'due_date': current_bill.due_date,
+          'service_name': current_bill.instance_service_name,
+        }
+        this.props.initialize(initial_values);
+      }
 
     renderField(field) {
         return (
