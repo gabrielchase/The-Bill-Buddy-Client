@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
+import { Link } from 'react-router-dom'
 
 import { fetchCurrentBill } from '../actions'
 
@@ -36,10 +37,15 @@ class BillPayments extends Component {
 
     render() {
         let { current_bill } = this.props
+        let edit_url = `/bills/edit/${current_bill.id}`
         return (
             <div>
+                <div className="float-right">
+                    <Link className="button" to={edit_url}>Edit Bill</Link>
+                </div>
                 <h1>{current_bill.name} Payments</h1>
                 <h4>Description: {current_bill.description}</h4>
+                <h4>Service: {current_bill.instance_service_name}</h4>
                 <br/>
                 <table>
                     <thead>
