@@ -21,6 +21,7 @@ import Dashboard from './components/dashboard'
 import BillIndex from './components/bill_index'
 import BillPayments from './components/bill_payments'
 import BillNew from './components/bill_new'
+import BillUpdate from './components/bill_update'
 import PaymentNew from './components/payment_new'
 import Navbar from './components/navbar'
 
@@ -39,6 +40,7 @@ ReactDOM.render(
                         <Switch>
                             <Route path="/bills/:bill_id/payments" component={BillPayments} />
                             <Route path="/bills/new" component={BillNew} />
+                            <Route path="/bills/edit/:bill_id" component={BillUpdate} />
                             <Route path="/bills" component={BillIndex} />
                             <Route path="/payment/new" component={PaymentNew} />
                             <Route path="/profile/edit" component={UserUpdate} />
