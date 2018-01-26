@@ -1,4 +1,4 @@
-import { FETCH_BILLS, CREATE_BILL, CREATE_PAYMENT } from '../actions'
+import { FETCH_BILLS, CREATE_BILL, CREATE_PAYMENT, UPDATE_BILL } from '../actions'
 
 
 export default function(state = {}, action) {
@@ -8,6 +8,8 @@ export default function(state = {}, action) {
     case CREATE_BILL:
         return action.payload
     case CREATE_PAYMENT: 
+        return action.payload
+    case UPDATE_BILL: 
         return action.payload
     default: 
         return state

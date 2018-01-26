@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { fetchCurrentBill } from '../actions'
+import { fetchCurrentBill, updateBill } from '../actions'
 
 
 class BillUpdate extends Component {
@@ -36,11 +36,13 @@ class BillUpdate extends Component {
     }
 
     async onSubmit(values) {
-        console.log('submitting: ', values)
+        let { bill_id } = this.props.match.params
+        await this.props.updateBill(bill_id, values)
+        await this.props.history.push(`/bills/${bill_id}/payments`)
     }
 
     render() {
-        const { handleSubmit} = this.props
+        const { handleSubmit } = this.props
         return(
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <h1>Edit a Bill</h1>
@@ -103,5 +105,5 @@ export default reduxForm({
     validate,
     form: 'BillUpdateForm'
 })(
-    connect(mapStateToProps, { fetchCurrentBill })(BillUpdate)
+    connect(mapStateToProps, { fetchCurrentBill, updateBill })(BillUpdate)
 )

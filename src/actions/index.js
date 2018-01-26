@@ -10,6 +10,7 @@ export const FETCH_USER = 'fetch_user'
 export const FETCH_BILLS = 'fetch_bills'
 export const FETCH_CURRENT_BILL = 'fetch_current_bill'
 export const CREATE_BILL = 'create_bill'
+export const UPDATE_BILL = 'update_bill'
 
 export const CREATE_PAYMENT = 'create_payment'
 
@@ -81,6 +82,15 @@ export async function fetchCurrentBill(bill_id=null) {
     const res = await axios.get(`${LOCAL_ROOT_URL}/bills/${bill_id}/`, headers)
     return {
         type: FETCH_CURRENT_BILL,
+        payload: res.data
+    }
+}
+
+export async function updateBill(bill_id, values) {
+    let headers = getHeaders()
+    const res = await axios.put(`${LOCAL_ROOT_URL}/bills/${bill_id}/`, values, headers)
+    return {
+        type: UPDATE_BILL,
         payload: res.data
     }
 }
