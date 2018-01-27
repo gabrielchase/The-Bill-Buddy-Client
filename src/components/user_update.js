@@ -20,8 +20,8 @@ class UserUpdate extends Component {
           'country': user.details.country,
           'mobile_number': user.details.mobile_number
         }
-        this.props.initialize(initial_values);
-      }
+        this.props.initialize(initial_values)
+    }
 
     renderField(field) {
         return (
