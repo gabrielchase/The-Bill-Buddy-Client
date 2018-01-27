@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { fetchCurrentPayment } from '../actions'
+import { fetchCurrentPayment, updatePayment } from '../actions'
 
 
 class PaymentUpdate extends Component {
@@ -62,6 +62,17 @@ class PaymentUpdate extends Component {
 
     async onSubmit(values) {
         console.log(values)
+        let { payment_id } = this.props.match.params
+        let { current_payment } = this.props
+        if (!values.due_date) {
+            delete values.due_date
+        }
+        if (!values.date_paid) {
+            delete values.date_paid
+        }
+        values.bill_id = 0
+        await this.props.updatePayment(payment_id, values)
+        await this.props.history.push(`/bills/${current_payment.bill_id}/payments`)
     }
     
     render() {
@@ -141,5 +152,5 @@ export default reduxForm({
     validate,
     form: 'PaymentUpdateForm'
 })(
-    connect(mapStateToProps, { fetchCurrentPayment })(PaymentUpdate)
+    connect(mapStateToProps, { fetchCurrentPayment, updatePayment })(PaymentUpdate)
 )
