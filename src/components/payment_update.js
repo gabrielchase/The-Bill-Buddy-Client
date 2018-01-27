@@ -76,7 +76,7 @@ class PaymentUpdate extends Component {
     }
     
     render() {
-        let { current_payment, handleSubmit } = this.props
+        let { handleSubmit } = this.props
         return(
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <h1>Edit Payment</h1>
