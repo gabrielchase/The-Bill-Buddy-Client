@@ -16,6 +16,8 @@ export const CREATE_PAYMENT = 'create_payment'
 
 export const FETCH_SERVICES = 'fetch_services'
 
+export const FETCH_CURRENT_PAYMENT = 'fetch_current_payment'
+
 
 export function getHeaders() {
     return {
@@ -119,6 +121,15 @@ export async function fetchServices() {
     const res = await axios.get(api_url, headers)
     return {
         type: FETCH_SERVICES, 
+        payload: res.data
+    }
+}
+
+export async function fetchCurrentPayment(payment_id) {
+    let headers = getHeaders()
+    const res = await axios.get(`${LOCAL_ROOT_URL}/payments/${payment_id}/`, headers)
+    return {
+        type: FETCH_CURRENT_PAYMENT,
         payload: res.data
     }
 }
