@@ -17,9 +17,10 @@ class BillPayments extends Component {
         let { current_bill } = this.props
         if (current_bill) {
             return _.map(current_bill.payments, (payment, idx) => {
+                let payment_url = `/bills/${current_bill.id}/payments/${payment.id}/edit`
                 return(
                     <tr key={payment.id}>
-                        <td>{idx+1}</td>
+                        <td><Link to={payment_url}>{idx+1}</Link></td>
                         <td>{payment.amount}</td>
                         <td>{payment.due_date}</td>
                         <td>{payment.status}</td>
