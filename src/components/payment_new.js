@@ -66,8 +66,7 @@ class PaymentNew extends Component {
             return (
                 <div></div>
             )
-        }
-        
+        }   
     }
 
     renderTextarea(field) {
@@ -167,7 +166,7 @@ function mapStateToProps(state) {
     }
 }
 
-export default reduxForm({
+export default reduxForm({2
     validate,
     form: 'PaymentNewForm'
 })(
