@@ -34,8 +34,9 @@ class Dashboard extends Component {
         let { user } = this.props
         return (
             <div>
-                <h1>Dashboard</h1>
-                <h4>Welcome {user.first_name} {user.last_name}</h4>
+                <br/>
+                <h1 className="center-text">The Bill Buddy</h1>
+                <h4 className="center-text">Welcome {user.first_name} {user.last_name} !</h4>
 
                 <div className="row">
                     <div className="column" id="payments">
