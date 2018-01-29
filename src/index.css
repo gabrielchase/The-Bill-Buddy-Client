@@ -40,3 +40,15 @@ html * {
 .form-errors {
     color: #DD3999
 }
+
+#payments {
+    padding-top: 100px;
+}
+
+#expenditure {
+    padding-top: 100px;
+}
+
+.center-text {
+    text-align: center;
+}
