@@ -7,11 +7,6 @@ import { fetchUser, fetchBills } from '../actions'
 import _ from 'lodash'
 
 
-const data01 = [{name: 'Group A', value: 400}, {name: 'Group B', value: 300},
-                  {name: 'Group C', value: 300}, {name: 'Group D', value: 200},
-                  {name: 'Group E', value: 278}, {name: 'Group F', value: 189}]
-
-
 class Dashboard extends Component {
     async componentDidMount() {
         await this.props.fetchUser()
@@ -35,14 +30,40 @@ class Dashboard extends Component {
         )
     }
 
+    renderPieChart(data) {
+        if (data) {
+            return (
+                <PieChart width={800} height={300} className="pie-chart">
+                    <Pie data={data}  cx="50%" cy="50%" fill="#8884d8" label/>
+                    <Tooltip/>
+                </PieChart>
+            )
+        } else {
+            return (
+                <div></div>
+            )
+        }
+    }
+
     render() {
         let { user } = this.props
+        let piechart_data = []
+        
+        for (let key in user.expenditure_this_year) {
+            if (key !== 'total' && !_.includes(key, '_percentage')) {
+                let obj = {
+                    'name': key,
+                    'value': user.expenditure_this_year[key]
+                }
+                piechart_data.push(obj)
+            }
+        }
+
         return (
             <div>
                 <br/>
                 <h1 className="center-text">The Bill Buddy</h1>
                 <h4 className="center-text">Welcome {user.first_name} {user.last_name} !</h4>
-
                 <div className="row">
                     <div className="column" id="payments">
                         <h4 className="center-text">Payments Due This Month</h4>
@@ -63,15 +84,9 @@ class Dashboard extends Component {
                     </div>
                     <div className="column" id="expenditure">
                         <h4 className="center-text">Expenditure This Year</h4>
-                        <PieChart width={800} height={300} className="pie-chart">
-                            <Pie data={data01}  cx="50%" cy="50%" fill="#8884d8" label/>
-                            <Tooltip/>
-                        </PieChart>
+                        {this.renderPieChart(piechart_data)}
                     </div>
                 </div>
-                
-
-                
             </div>
         )
     }
