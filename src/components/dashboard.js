@@ -1,10 +1,13 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {PieChart, Pie, Legend, Tooltip } from 'recharts'
+import {PieChart, Pie, Legend, Tooltip, Cell } from 'recharts'
+
+import { COLORS } from '../const'
 
 import { fetchUser, fetchBills } from '../actions'
 
 import _ from 'lodash'
+
 
 
 class Dashboard extends Component {
@@ -34,7 +37,11 @@ class Dashboard extends Component {
         if (data) {
             return (
                 <PieChart width={800} height={300} className="pie-chart">
-                    <Pie data={data}  cx="50%" cy="50%" fill="#8884d8" label/>
+                    <Pie data={data}  cx="50%" cy="50%" fill="#8884d8" label>
+                        {data.map((datum, index) => 
+                            <Cell fill={COLORS[index % COLORS.length]} />
+                        )}
+                    </Pie>
                     <Tooltip/>
                 </PieChart>
             )
