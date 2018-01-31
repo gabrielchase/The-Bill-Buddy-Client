@@ -9,7 +9,6 @@ import { fetchUser, fetchBills } from '../actions'
 import _ from 'lodash'
 
 
-
 class Dashboard extends Component {
     async componentDidMount() {
         await this.props.fetchUser()
@@ -36,12 +35,13 @@ class Dashboard extends Component {
     renderPieChart(data) {
         if (data) {
             return (
-                <PieChart width={800} height={300} className="pie-chart">
-                    <Pie data={data}  cx="50%" cy="50%" fill="#8884d8" label>
+                <PieChart width={800} height={300}>
+                    <Pie data={data}  cx="50%" cy="50%" fill="#8884d8">
                         {data.map((datum, index) => 
                             <Cell fill={COLORS[index % COLORS.length]} />
                         )}
                     </Pie>
+                    <Legend/>
                     <Tooltip/>
                 </PieChart>
             )
