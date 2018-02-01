@@ -14,6 +14,7 @@ class PaymentNew extends Component {
             'statusValue': null
         }
     }
+    
     async componentDidMount() {
         await this.props.fetchBills()
     }
@@ -185,8 +186,7 @@ function mapStateToProps(state) {
 
 export default reduxForm({
     validate,
-    form: 'PaymentNewForm',
-    hasStatusValue: document.getElementsByName('status').value
+    form: 'PaymentNewForm'
 })(
     connect(mapStateToProps, { fetchBills, createPayment })(PaymentNew)
 )
