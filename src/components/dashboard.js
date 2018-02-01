@@ -4,7 +4,7 @@ import {PieChart, Pie, Legend, Tooltip, Cell } from 'recharts'
 
 import { COLORS } from '../const'
 
-import { fetchUser, fetchBills } from '../actions'
+import { fetchUser } from '../actions'
 
 import _ from 'lodash'
 
@@ -101,9 +101,8 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
     return { 
-        user: state.user,
-        bills: state.bills
+        user: state.user
     }
 }
 
-export default connect(mapStateToProps, { fetchUser, fetchBills })(Dashboard)
+export default connect(mapStateToProps, { fetchUser })(Dashboard)
