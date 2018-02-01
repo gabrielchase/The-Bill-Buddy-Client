@@ -4,14 +4,27 @@ import {PieChart, Pie, Legend, Tooltip, Cell } from 'recharts'
 
 import { COLORS } from '../const'
 
-import { fetchUser } from '../actions'
+import { fetchUser, sortPaymentsThisMonth } from '../actions'
 
 import _ from 'lodash'
 
 
 class Dashboard extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            'sortAscend': false
+        }
+    }
+    
     async componentDidMount() {
         await this.props.fetchUser()
+    }
+
+    async sortPayments(category) {
+        let { user } = this.props
+        this.setState({'sortAscend': !this.state.sortAscend})
+        await this.props.sortPaymentsThisMonth(user, category, this.state.sortAscend)
     }
 
     renderPaymentsThisMonth() {
@@ -54,6 +67,7 @@ class Dashboard extends Component {
 
     render() {
         let { user } = this.props
+        console.log(user)
         let piechart_data = []
         
         for (let key in user.expenditure_this_year) {
@@ -79,11 +93,11 @@ class Dashboard extends Component {
                             <thead>
                                 <tr>
                                     <th></th>
-                                    <th>Due Date</th>
-                                    <th>Service</th>
-                                    <th>Bill</th>
-                                    <th>Status</th>
-                                    <th>Amount</th>
+                                    <th onClick={() => this.sortPayments('due_date')}>Due Date</th>
+                                    <th onClick={() => this.sortPayments('service')}>Service</th>
+                                    <th onClick={() => this.sortPayments('bill_name')}>Bill</th>
+                                    <th onClick={() => this.sortPayments('status')}>Status</th>
+                                    <th onClick={() => this.sortPayments('amount')}>Amount</th>
                                 </tr>
                             </thead>
                             {this.renderPaymentsThisMonth()}
@@ -105,4 +119,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { fetchUser })(Dashboard)
+export default connect(mapStateToProps, { fetchUser, sortPaymentsThisMonth })(Dashboard)

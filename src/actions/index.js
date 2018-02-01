@@ -7,6 +7,7 @@ export const LOGIN_USER_FAILURE = 'login_user_failure'
 
 export const CREATE_USER = 'create_user'
 export const FETCH_USER = 'fetch_user'
+export const SORT_USER_PAYMENTS = 'sort_user_payments'
 
 export const FETCH_BILLS = 'fetch_bills'
 export const FETCH_CURRENT_BILL = 'fetch_current_bill'
@@ -154,5 +155,16 @@ export async function sortBillPayments(current_bill, category, mode_bool) {
     return {
         type: SORT_BILL_PAYMENTS, 
         payload: current_bill
+    }
+}
+
+export async function sortPaymentsThisMonth(user, category, mode_bool) {
+    let mode = null
+    mode_bool ? mode = 'asc' : mode = 'desc'
+    let sorted_payments = _.orderBy(user.payments_this_month, [category], [mode])
+    user.payments_this_month = sorted_payments
+    return {
+        type: SORT_USER_PAYMENTS, 
+        payload: user
     }
 }
