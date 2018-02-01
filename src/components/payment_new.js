@@ -8,6 +8,12 @@ import _ from 'lodash'
 
 
 class PaymentNew extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            'statusValue': null
+        }
+    }
     async componentDidMount() {
         await this.props.fetchBills()
     }
@@ -24,12 +30,16 @@ class PaymentNew extends Component {
         )
     }
 
+    handleStatusChange() {
+        this.setState({'statusValue': document.getElementById('payment-status').value})
+    }
+
     renderStatusField(field) {
         return (
             <div>
                 <label htmlFor="">{field.label}</label>
-                <select {...field.input}>
-                    <option value="" disabled>Select</option>
+                <select {...field.input} id="payment-status">
+                    <option value="" disabled>Select</option>   
                     <option value="Not Paid">Not Paid</option>
                     <option value="Paid">Paid</option>
                 </select>
@@ -117,16 +127,23 @@ class PaymentNew extends Component {
                             name="status"
                             label="Status"
                             component={this.renderStatusField}
+                            onChange={this.handleStatusChange.bind(this)}
                         />
                     </div>
-                    <div className="column column-50">
-                        <Field 
-                            name="date_paid"
-                            label="Date Paid"
-                            type="date"
-                            component={this.renderField}
-                        />
-                    </div>
+                    {
+                        this.state.statusValue === 'Paid' ? 
+                        <div className="column column-50">
+                            <Field 
+                                name="date_paid"
+                                label="Date Paid"
+                                type="date"
+                                component={this.renderField}
+                            />
+                        </div> 
+                        :
+                        <div></div>
+                    }
+                    
                 </div>
                 <Field 
                     name="bill_id"
@@ -168,7 +185,8 @@ function mapStateToProps(state) {
 
 export default reduxForm({
     validate,
-    form: 'PaymentNewForm'
+    form: 'PaymentNewForm',
+    hasStatusValue: document.getElementsByName('status').value
 })(
     connect(mapStateToProps, { fetchBills, createPayment })(PaymentNew)
 )
