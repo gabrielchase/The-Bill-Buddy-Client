@@ -8,6 +8,13 @@ import _ from 'lodash'
 
 
 class BillPayments extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            'sortAscend': false
+        }
+    }
+    
     async componentDidMount() {
         let { bill_id } = this.props.match.params
         await this.props.fetchCurrentBill(bill_id)
@@ -15,7 +22,8 @@ class BillPayments extends Component {
 
     async sortBillPayments(category) {
         let { current_bill } = this.props
-        await this.props.sortBillPayments(current_bill, category)
+        this.setState({'sortAscend': !this.state.sortAscend})
+        await this.props.sortBillPayments(current_bill, category, this.state.sortAscend)
     }
 
     renderPayments() {

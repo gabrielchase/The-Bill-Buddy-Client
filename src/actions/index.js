@@ -146,8 +146,10 @@ export async function updatePayment(payment_id, values) {
     }
 }
 
-export async function sortBillPayments(current_bill, category) {
-    let sorted_payments = _.orderBy(current_bill.payments, [category])
+export async function sortBillPayments(current_bill, category, mode_bool) {
+    let mode = null
+    mode_bool ? mode = 'asc' : mode = 'desc'
+    let sorted_payments = _.orderBy(current_bill.payments, [category], [mode])
     current_bill.payments = sorted_payments
     return {
         type: SORT_BILL_PAYMENTS, 
