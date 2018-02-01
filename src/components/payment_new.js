@@ -144,7 +144,6 @@ class PaymentNew extends Component {
                         :
                         <div></div>
                     }
-                    
                 </div>
                 <Field 
                     name="bill_id"

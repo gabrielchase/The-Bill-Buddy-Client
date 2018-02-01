@@ -6,13 +6,20 @@ import { fetchCurrentPayment, updatePayment } from '../actions'
 
 
 class PaymentUpdate extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            'statusValue': null
+        }
+    }
+    
     async componentDidMount() {
         let { payment_id } = this.props.match.params
         await this.props.fetchCurrentPayment(payment_id)
         await this.handleInitialize()
     }
 
-    handleInitialize() {
+    async handleInitialize() {
         let { current_payment } = this.props
         let initial_values = {
           'amount': current_payment.amount,
@@ -21,7 +28,12 @@ class PaymentUpdate extends Component {
           'status': current_payment.status,
           'additional_notes': current_payment.additional_notes
         }
-        this.props.initialize(initial_values)
+        await this.setState({'statusValue': current_payment.status})
+        await this.props.initialize(initial_values)
+    }
+
+    handleStatusChange() {
+        this.setState({'statusValue': document.getElementById('payment-status').value})
     }
 
     renderField(field) {
@@ -40,7 +52,7 @@ class PaymentUpdate extends Component {
         return (
             <div>
                 <label htmlFor="">{field.label}</label>
-                <select {...field.input}>
+                <select {...field.input} id="payment-status">
                     <option value="" disabled>Select</option>
                     <option value="Not Paid">Not Paid</option>
                     <option value="Paid">Paid</option>
@@ -61,7 +73,6 @@ class PaymentUpdate extends Component {
     }
 
     async onSubmit(values) {
-        console.log(values)
         let { payment_id } = this.props.match.params
         let { current_payment } = this.props
         if (!values.due_date) {
@@ -104,16 +115,22 @@ class PaymentUpdate extends Component {
                             name="status"
                             label="Status"
                             component={this.renderStatusField}
+                            onChange={this.handleStatusChange.bind(this)}
                         />
                     </div>
-                    <div className="column column-50">
-                        <Field 
-                            name="date_paid"
-                            label="Date Paid"
-                            type="date"
-                            component={this.renderField}
-                        />
-                    </div>
+                    {
+                        this.state.statusValue === 'Paid' ? 
+                        <div className="column column-50">
+                            <Field 
+                                name="date_paid"
+                                label="Date Paid"
+                                type="date"
+                                component={this.renderField}
+                            />
+                        </div> 
+                        :
+                        <div></div>
+                    }
                 </div>
                 <Field 
                     name="additional_notes"
