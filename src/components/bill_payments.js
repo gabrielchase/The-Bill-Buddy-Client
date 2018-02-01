@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { fetchCurrentBill } from '../actions'
+import { fetchCurrentBill, sortBillPayments } from '../actions'
 
 import _ from 'lodash'
 
@@ -11,6 +11,11 @@ class BillPayments extends Component {
     async componentDidMount() {
         let { bill_id } = this.props.match.params
         await this.props.fetchCurrentBill(bill_id)
+    }
+
+    async sortBillPayments(category) {
+        let { current_bill } = this.props
+        await this.props.sortBillPayments(current_bill, category)
     }
 
     renderPayments() {
@@ -53,10 +58,10 @@ class BillPayments extends Component {
                     <thead>
                         <tr>
                             <th></th>
-                            <th>Amount</th>
-                            <th>Due Date</th>
-                            <th>Status</th>
-                            <th>Date Paid</th>
+                            <th onClick={() => this.sortBillPayments('amount')}>Amount</th>
+                            <th onClick={() => this.sortBillPayments('due_date')}>Due Date</th>
+                            <th onClick={() => this.sortBillPayments('status')}>Status</th>
+                            <th onClick={() => this.sortBillPayments('date_paid')}>Date Paid</th>
                             <th>Notes</th>
                         </tr>
                     </thead>
@@ -75,4 +80,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { fetchCurrentBill })(BillPayments)
+export default connect(mapStateToProps, { fetchCurrentBill, sortBillPayments })(BillPayments)

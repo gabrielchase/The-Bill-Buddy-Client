@@ -1,4 +1,5 @@
 import axios from 'axios'
+import _ from 'lodash'
 import { LOCAL_ROOT_URL } from '../const'
 
 export const LOGIN_USER_SUCCESS = 'login_user_success'
@@ -11,6 +12,7 @@ export const FETCH_BILLS = 'fetch_bills'
 export const FETCH_CURRENT_BILL = 'fetch_current_bill'
 export const CREATE_BILL = 'create_bill'
 export const UPDATE_BILL = 'update_bill'
+export const SORT_BILL_PAYMENTS = 'sort_bill_payments'
 
 export const CREATE_PAYMENT = 'create_payment'
 
@@ -138,9 +140,17 @@ export async function fetchCurrentPayment(payment_id) {
 export async function updatePayment(payment_id, values) {
     let headers = getHeaders()
     const res = await axios.put(`${LOCAL_ROOT_URL}/payments/${payment_id}/`, values, headers)
-    console.log(res)
     return {
         type: FETCH_CURRENT_PAYMENT,
         payload: res.data
+    }
+}
+
+export async function sortBillPayments(current_bill, category) {
+    let sorted_payments = _.orderBy(current_bill.payments, [category])
+    current_bill.payments = sorted_payments
+    return {
+        type: SORT_BILL_PAYMENTS, 
+        payload: current_bill
     }
 }
