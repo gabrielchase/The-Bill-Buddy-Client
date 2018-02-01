@@ -28,7 +28,6 @@ class UserCreate extends Component {
             delete values.country
             delete values.mobile_number
 
-            console.log(values)
 
             await this.props.createUser(values)
             await this.props.history.push('/login')

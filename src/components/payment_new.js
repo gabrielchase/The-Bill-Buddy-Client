@@ -92,7 +92,6 @@ class PaymentNew extends Component {
 
     async onSubmit(values) {
         let bill = await _.find(this.props.bills, (bill) => {
-            console.log(bill.id, typeof(bill.id))
             return bill.id === parseInt(values.bill_id)
         })
         await this.props.createPayment(values)

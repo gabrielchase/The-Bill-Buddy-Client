@@ -13,7 +13,6 @@ class BillIndex extends Component {
     }
 
     renderBills(service_name, bills) {
-        console.log(bills)
         return _.map(bills, (bill) => {
             return (
                 <li key={bill.id}>
