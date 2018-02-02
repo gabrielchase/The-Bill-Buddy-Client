@@ -14,7 +14,7 @@ class BillNew extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            'multiplePayments': false
+            'multiplePayments': true
         }
     }
 
@@ -68,15 +68,33 @@ class BillNew extends Component {
                     type="text"
                     component={this.renderField}
                 />
-                <div className="row">
-                    <br/>
-                    <div className="column column-25">
-                        <Field name="months" component={CheckboxGroup} options={MONTHS.slice(0,6)} />
+                
+                <label htmlFor="multiplePaymentsCheckbox">
+                    <input 
+                        id="multiplePaymentsCheckbox" 
+                        type="checkbox" 
+                        onChange={() => {
+                            this.setState({'multiplePayments': !this.state.multiplePayments})
+                        }}
+                    />
+                    <span className="option-span">Create Multiple Payments</span>
+                </label>
+                {
+                    this.state.multiplePayments ? 
+                    <div className="months-column">
+                        <h4 class="months-h4">Check Months To Pay Bill</h4>
+                        <div className="row">
+                            <div className="column column-25">
+                                <Field name="months" component={CheckboxGroup} options={MONTHS.slice(0,6)} />
+                            </div>
+                            <div className="column column-25">
+                                <Field name="months" component={CheckboxGroup} options={MONTHS.slice(6,12)} />
+                            </div>
+                        </div>
                     </div>
-                    <div className="column column-25">
-                        <Field name="months" component={CheckboxGroup} options={MONTHS.slice(6,12)} />
-                    </div>
-                </div>
+                    :
+                    <div></div>
+                }
                 <button type="submit">Submit</button>
             </form>
         )

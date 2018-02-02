@@ -8,7 +8,7 @@ class CheckboxGroup extends React.Component {
         return options.map((option, index) => {
             return (
                 <div className="checkbox" key={index}>
-                    <label>
+                    <span>
                         <input type="checkbox"
                             name={`${input.name}[${index}]`}
                             value={option.name}
@@ -24,7 +24,7 @@ class CheckboxGroup extends React.Component {
                                 return input.onChange(newValue);
                             }}/>
                         <span class="option-span">{option.name}</span>
-                    </label>
+                    </span>
                 </div>)
         });
     }
