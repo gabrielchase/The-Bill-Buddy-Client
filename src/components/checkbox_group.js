@@ -1,7 +1,6 @@
 import React from 'react';
 
 class CheckboxGroup extends React.Component {
-
     checkboxGroup() {
         let {label, required, options, input, meta} = this.props;
 
@@ -23,7 +22,7 @@ class CheckboxGroup extends React.Component {
 
                                 return input.onChange(newValue);
                             }}/>
-                        <span class="option-span">{option.name}</span>
+                        <span className="option-span">{option.name}</span>
                     </span>
                 </div>)
         });
