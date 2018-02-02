@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { createBill } from '../actions'
 import CheckboxGroup  from './checkbox_group'
 
-import { MONTHS } from '../const'
+import { MONTHS, DAYS } from '../const'
 
 import _ from 'lodash'
 
@@ -14,7 +14,7 @@ class BillNew extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            'multiplePayments': true
+            'multiplePayments': false
         }
     }
 
@@ -30,6 +30,33 @@ class BillNew extends Component {
         )
     }
 
+    monthsAndDays() {
+        return (
+            <div>
+                <div className="months-column">
+                    <h4 className="months-h4">Check Months To Pay Bill <span className="days-h4">Check Days to Pay Bill</span></h4>
+                    <div className="row">
+                        <div className="column column-20">
+                            <Field name="months" component={CheckboxGroup} options={MONTHS.slice(0,6)} />
+                        </div>
+                        <div className="column column-20">
+                            <Field name="months" component={CheckboxGroup} options={MONTHS.slice(6,12)} />
+                        </div>
+                        <div className="column column-20">
+                            <Field name="days" component={CheckboxGroup} options={DAYS.slice(0,10)} />
+                        </div>
+                        <div className="column column-20">
+                            <Field name="days" component={CheckboxGroup} options={DAYS.slice(10,20)} />
+                        </div>
+                        <div className="column column-20">
+                            <Field name="days" component={CheckboxGroup} options={DAYS.slice(20,31)} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
+    }
+ 
     async onSubmit(values) {
         let service_name = values.service_name.toLowerCase()
         service_name = service_name.charAt(0).toUpperCase() + service_name.slice(1)
@@ -81,17 +108,7 @@ class BillNew extends Component {
                 </label>
                 {
                     this.state.multiplePayments ? 
-                    <div className="months-column">
-                        <h4 class="months-h4">Check Months To Pay Bill</h4>
-                        <div className="row">
-                            <div className="column column-25">
-                                <Field name="months" component={CheckboxGroup} options={MONTHS.slice(0,6)} />
-                            </div>
-                            <div className="column column-25">
-                                <Field name="months" component={CheckboxGroup} options={MONTHS.slice(6,12)} />
-                            </div>
-                        </div>
-                    </div>
+                    this.monthsAndDays()
                     :
                     <div></div>
                 }

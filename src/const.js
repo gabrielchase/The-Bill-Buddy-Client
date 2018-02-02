@@ -19,3 +19,5 @@ export const MONTHS = [
     {id: 11, name: 'November'}, 
     {id: 12, name: 'December'}, 
 ]
+
+export const DAYS = Array.apply(null, Array(31)).map(function (_, i) {return {'id': i+1, 'name': i+1} })

@@ -62,5 +62,9 @@ html * {
 }
 
 .months-h4 {
-    margin-left: 6%;
+    margin-left: 3%;
+}
+
+.days-h4 {
+    padding-left: 300px;
 }
