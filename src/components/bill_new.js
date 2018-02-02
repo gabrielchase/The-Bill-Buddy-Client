@@ -3,9 +3,21 @@ import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
 import { createBill } from '../actions'
+import CheckboxGroup  from './checkbox_group'
+
+import { MONTHS } from '../const'
+
+import _ from 'lodash'
 
 
 class BillNew extends Component {
+    constructor(props) {
+        super(props)
+        this.state = {
+            'multiplePayments': false
+        }
+    }
+
     renderField(field) {
         return (
             <div>
@@ -56,6 +68,15 @@ class BillNew extends Component {
                     type="text"
                     component={this.renderField}
                 />
+                <div className="row">
+                    <br/>
+                    <div className="column column-25">
+                        <Field name="months" component={CheckboxGroup} options={MONTHS.slice(0,6)} />
+                    </div>
+                    <div className="column column-25">
+                        <Field name="months" component={CheckboxGroup} options={MONTHS.slice(6,12)} />
+                    </div>
+                </div>
                 <button type="submit">Submit</button>
             </form>
         )

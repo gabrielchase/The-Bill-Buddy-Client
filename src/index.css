@@ -52,3 +52,7 @@ html * {
 .center-text {
     text-align: center;
 }
+
+.option-span {
+    margin-left: 5px;
+}
