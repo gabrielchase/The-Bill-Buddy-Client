@@ -4,6 +4,11 @@ import { connect } from 'react-redux'
 
 import { fetchBills, createPayment } from '../actions'
 
+import CheckboxGroup  from './checkbox_group'
+
+import { MONTHS, DAYS } from '../const'
+
+
 import _ from 'lodash'
 
 
@@ -11,12 +16,42 @@ class PaymentNew extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            'statusValue': null
+            'statusValue': '',
+            'paymentType': ''
         }
     }
     
     async componentDidMount() {
         await this.props.fetchBills()
+    }
+
+    renderMonthsAndDays() {
+        let { statusValue, paymentType } = this.state
+        return (
+            <div>
+                <br/>
+                <div className="months-column">
+                    <h4 className="months-h4">Check Months To Pay Bill <span className="days-h4">Check Days to Pay Bill</span></h4>
+                    <div className="row">
+                        <div className="column column-20">
+                            <Field name="months" component={CheckboxGroup} options={MONTHS.slice(0,6)} />
+                        </div>
+                        <div className="column column-20">
+                            <Field name="months" component={CheckboxGroup} options={MONTHS.slice(6,12)} />
+                        </div>
+                        <div className="column column-20">
+                            <Field name="days" component={CheckboxGroup} options={DAYS.slice(0,10)} />
+                        </div>
+                        <div className="column column-20">
+                            <Field name="days" component={CheckboxGroup} options={DAYS.slice(10,20)} />
+                        </div>
+                        <div className="column column-20">
+                            <Field name="days" component={CheckboxGroup} options={DAYS.slice(20,31)} />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        )
     }
 
     renderField(field) {
@@ -100,62 +135,99 @@ class PaymentNew extends Component {
 
     render() {
         const { handleSubmit, bills} = this.props
+        console.log(this.state.paymentType)
         return(
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
-                <h1>Add a Payment</h1>
+                
+                <h1>Add a Payment</h1>    
+                
                 <div className="row">
-                    <div className="column column-50">
+                    <div className="column">
                         <Field 
-                            name="amount"
-                            label="Amount"
-                            type="number"
-                            component={this.renderField}
-                        />
-                    </div>
-                    <div className="column column-50">
-                        <Field 
-                            name="due_date"
-                            label="Due Date"
-                            type="date"
-                            component={this.renderField}
+                            name="bill_id"
+                            label="Bill"
+                            bills={bills}
+                            component={this.renderBillField}
                         />
                     </div>
                 </div>
+                
+
                 <div className="row">
+                    <div className="column column-20">
+                        <label htmlFor="" id="radio-label">Payment Type: </label>
+                    </div>
                     <div className="column column-50">
+                        <input id="single" name="payment-type" type="radio" onClick={() => this.setState({'paymentType': 'Single'})}/>
+                        <label for="single" name="payment-type" id="radio-label">Single</label>
+
+                        <input id="multiple" name="payment-type" type="radio" onClick={() => this.setState({'paymentType': 'Multiple'})}/>
+                        <label for="multiple" name="payment-type" id="radio-label">Multiple</label>
+                    </div>
+                </div>
+                
+                {
+                    this.state.paymentType === 'Single' ? 
+                    <div>
+                        <div className="row">
+                            <div className="column column-50">
+                                <Field 
+                                    name="status"
+                                    label="Status"
+                                    component={this.renderStatusField}
+                                    onChange={this.handleStatusChange.bind(this)}
+                                />
+                            </div>
+                            {
+                                this.state.statusValue === 'Paid' ? 
+                                <div className="column column-50">
+                                    <Field 
+                                        name="date_paid"
+                                        label="Date Paid"
+                                        type="date"
+                                        component={this.renderField}
+                                    />
+                                </div> 
+                                :
+                                <div></div>
+                            }
+                        </div>
+                        <div className="row">
+                            <div className="column column-50">
+                                <Field 
+                                    name="amount"
+                                    label="Amount"
+                                    type="number"
+                                    component={this.renderField}
+                                />
+                            </div>
+                            <div className="column column-50">
+                                <Field 
+                                    name="due_date"
+                                    label="Due Date"
+                                    type="date"
+                                    component={this.renderField}
+                                />
+                            </div>
+                        </div>
                         <Field 
-                            name="status"
-                            label="Status"
-                            component={this.renderStatusField}
-                            onChange={this.handleStatusChange.bind(this)}
+                            name="additional_notes"
+                            label="Additional Notes"
+                            type="text"
+                            component={this.renderTextarea}
                         />
                     </div>
-                    {
-                        this.state.statusValue === 'Paid' ? 
-                        <div className="column column-50">
-                            <Field 
-                                name="date_paid"
-                                label="Date Paid"
-                                type="date"
-                                component={this.renderField}
-                            />
-                        </div> 
-                        :
-                        <div></div>
-                    }
-                </div>
-                <Field 
-                    name="bill_id"
-                    label="Bill"
-                    bills={bills}
-                    component={this.renderBillField}
-                />
-                <Field 
-                    name="additional_notes"
-                    label="Additional Notes"
-                    type="text"
-                    component={this.renderTextarea}
-                />
+                    :
+                    <div></div>
+                } 
+                
+                { 
+                    this.state.paymentType === 'Multiple' ?
+                    this.renderMonthsAndDays()
+                    :
+                    <div></div>
+                }
+                <br/>
                 <button type="submit">Submit</button>
             </form>
         )
