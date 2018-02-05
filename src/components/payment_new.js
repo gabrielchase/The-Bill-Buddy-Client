@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { fetchBills, createPayment } from '../actions'
+import { fetchBills, createPayment, createMultiplePayments } from '../actions'
 
 import CheckboxGroup  from './checkbox_group'
 
@@ -31,7 +31,7 @@ class PaymentNew extends Component {
             <div>
                 <br/>
                 <div className="months-column">
-                    <h4 className="months-h4">Check Months To Pay Bill <span className="days-h4">Check Days to Pay Bill</span></h4>
+                    <h4 className="months-h4">Check Months To Pay Bill <span className="days-h4">Check Days in the Month to Pay Bill</span></h4>
                     <div className="row">
                         <div className="column column-20">
                             <Field name="months" component={CheckboxGroup} options={MONTHS.slice(0,6)} />
@@ -126,16 +126,23 @@ class PaymentNew extends Component {
     }
 
     async onSubmit(values) {
+        let { paymentType } = this.state
         let bill = await _.find(this.props.bills, (bill) => {
             return bill.id === parseInt(values.bill_id)
         })
-        await this.props.createPayment(values)
+
+        if (paymentType === 'Single') {
+            await this.props.createPayment(values)
+        } else if (paymentType === 'Multiple') {
+            await this.props.createMultiplePayments(values)
+        }
+        
         await this.props.history.push(`/bills/${bill.id}/payments`)
     }
 
     render() {
         const { handleSubmit, bills} = this.props
-        console.log(this.state.paymentType)
+
         return(
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 
@@ -258,6 +265,6 @@ export default reduxForm({
     validate,
     form: 'PaymentNewForm'
 })(
-    connect(mapStateToProps, { fetchBills, createPayment })(PaymentNew)
+    connect(mapStateToProps, { fetchBills, createPayment, createMultiplePayments })(PaymentNew)
 )
 

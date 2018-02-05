@@ -119,6 +119,11 @@ export async function createPayment(values) {
     }
 }
 
+export async function createMultiplePayments(values) {
+    console.log('createMultiplePayments', values)
+    console.log(values)
+}
+
 export async function fetchServices() {
     let headers = getHeaders()
     let api_url = `${LOCAL_ROOT_URL}/services/`
