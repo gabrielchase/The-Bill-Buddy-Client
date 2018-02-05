@@ -16,6 +16,7 @@ export const UPDATE_BILL = 'update_bill'
 export const SORT_BILL_PAYMENTS = 'sort_bill_payments'
 
 export const CREATE_PAYMENT = 'create_payment'
+export const CREATE_PAYMENTS = 'create_payments'
 
 export const FETCH_SERVICES = 'fetch_services'
 
@@ -120,8 +121,12 @@ export async function createPayment(values) {
 }
 
 export async function createMultiplePayments(values) {
-    console.log('createMultiplePayments', values)
-    console.log(values)
+    let headers = getHeaders()
+    const res = await axios.post(`${LOCAL_ROOT_URL}/create-multiple-payments/`, values, headers)
+    return {
+        type: CREATE_PAYMENTS, 
+        payload: res.data
+    }
 }
 
 export async function fetchServices() {
