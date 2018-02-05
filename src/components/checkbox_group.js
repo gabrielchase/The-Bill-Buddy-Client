@@ -5,6 +5,7 @@ class CheckboxGroup extends React.Component {
         let {label, required, options, input, meta} = this.props;
 
         return options.map((option, index) => {
+            let inputId = `month-checkbox-${option.name}`
             return (
                 <div className="checkbox" key={index}>
                     <span>
@@ -12,6 +13,7 @@ class CheckboxGroup extends React.Component {
                             name={`${input.name}[${index}]`}
                             value={option.name}
                             checked={input.value.indexOf(option.name) !== -1}
+                            id={inputId}
                             onChange={(event) => {
                                 const newValue = [...input.value];
                                 if (event.target.checked) {
@@ -22,7 +24,7 @@ class CheckboxGroup extends React.Component {
 
                                 return input.onChange(newValue);
                             }}/>
-                        <span className="option-span">{option.name}</span>
+                        <label class="label-inline" for={inputId}>{option.name}</label>
                     </span>
                 </div>)
         });
