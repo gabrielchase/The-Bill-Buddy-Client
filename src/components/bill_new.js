@@ -47,12 +47,6 @@ class BillNew extends Component {
                     component={this.renderField}
                 />
                 <Field 
-                    name="due_date"
-                    label="Due Date"
-                    type="text"
-                    component={this.renderField}
-                />
-                <Field 
                     name="service_name"
                     label="Service"
                     type="text"
