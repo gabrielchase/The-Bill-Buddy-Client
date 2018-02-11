@@ -1,4 +1,13 @@
+export const HOSTNAME = window && window.location && window.location.hostname
+
 export const LOCAL_ROOT_URL = 'http://localhost:8000/api'
+export const PROD_ROOT_URL = 'https://thebillbuddyapi.herokuapp.com/api'
+
+function get_root_url() {
+    return ROOT_URL === 'localhost' ? LOCAL_ROOT_URL : PROD_ROOT_URL
+}
+
+export const ROOT_URL = get_root_url()
 
 export const COLORS = [
     '#0088FE', '#00C49F', '#FFBB28', '#FF8042', '#FF0000', '#FFFF00', '#008080', '#800080',
