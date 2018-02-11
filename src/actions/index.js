@@ -1,6 +1,6 @@
 import axios from 'axios'
 import _ from 'lodash'
-import { LOCAL_ROOT_URL } from '../const'
+import { ROOT_URL } from '../const'
 
 export const LOGIN_USER_SUCCESS = 'login_user_success'
 export const LOGIN_USER_FAILURE = 'login_user_failure'
@@ -34,7 +34,7 @@ export function getHeaders() {
 }
 
 export async function createUser(values) {
-    const res = await axios.post(`${LOCAL_ROOT_URL}/users/`, values)
+    const res = await axios.post(`${ROOT_URL}/users/`, values)
     return {
         type: CREATE_USER, 
         payload: res.data
@@ -44,7 +44,7 @@ export async function createUser(values) {
 export async function fetchUser() {
     let user_id = localStorage.getItem('user_id')
     let headers = getHeaders()
-    const res = await axios.get(`${LOCAL_ROOT_URL}/users/${user_id}/`, headers)
+    const res = await axios.get(`${ROOT_URL}/users/${user_id}/`, headers)
     return {
         type: FETCH_USER, 
         payload: res.data
@@ -54,7 +54,7 @@ export async function fetchUser() {
 export async function updateUser(values) {
     let user_id = localStorage.getItem('user_id')
     let headers = getHeaders()
-    const res = await axios.put(`${LOCAL_ROOT_URL}/users/${user_id}/`, values, headers)
+    const res = await axios.put(`${ROOT_URL}/users/${user_id}/`, values, headers)
     return {
         type: FETCH_USER, 
         payload: res.data
@@ -62,7 +62,7 @@ export async function updateUser(values) {
 }
 
 export async function loginUser(values) {
-    const res = await axios.post(`${LOCAL_ROOT_URL}/login/`, values)
+    const res = await axios.post(`${ROOT_URL}/login/`, values)
     await localStorage.setItem('user_id', res.data.user_id)
     await localStorage.setItem('jwt', res.data.token)
     return {
@@ -73,7 +73,7 @@ export async function loginUser(values) {
 
 export async function fetchBills(service_name=null) {
     let headers = getHeaders()
-    let api_url = `${LOCAL_ROOT_URL}/bills/`
+    let api_url = `${ROOT_URL}/bills/`
     if (service_name) {
         api_url += `?service=${service_name}`
     } 
@@ -86,7 +86,7 @@ export async function fetchBills(service_name=null) {
 
 export async function fetchCurrentBill(bill_id=null) {
     let headers = getHeaders()
-    const res = await axios.get(`${LOCAL_ROOT_URL}/bills/${bill_id}/`, headers)
+    const res = await axios.get(`${ROOT_URL}/bills/${bill_id}/`, headers)
     return {
         type: FETCH_CURRENT_BILL,
         payload: res.data
@@ -95,7 +95,7 @@ export async function fetchCurrentBill(bill_id=null) {
 
 export async function updateBill(bill_id, values) {
     let headers = getHeaders()
-    const res = await axios.put(`${LOCAL_ROOT_URL}/bills/${bill_id}/`, values, headers)
+    const res = await axios.put(`${ROOT_URL}/bills/${bill_id}/`, values, headers)
     return {
         type: UPDATE_BILL,
         payload: res.data
@@ -104,7 +104,7 @@ export async function updateBill(bill_id, values) {
 
 export async function createBill(values) {
     let headers = getHeaders()
-    const res = await axios.post(`${LOCAL_ROOT_URL}/bills/`, values, headers)
+    const res = await axios.post(`${ROOT_URL}/bills/`, values, headers)
     return {
         type: CREATE_BILL, 
         payload: res.data
@@ -113,7 +113,7 @@ export async function createBill(values) {
 
 export async function createPayment(values) {
     let headers = getHeaders()
-    const res = await axios.post(`${LOCAL_ROOT_URL}/payments/`, values, headers)
+    const res = await axios.post(`${ROOT_URL}/payments/`, values, headers)
     return {
         type: CREATE_PAYMENT, 
         payload: res.data
@@ -122,7 +122,7 @@ export async function createPayment(values) {
 
 export async function createMultiplePayments(values) {
     let headers = getHeaders()
-    const res = await axios.post(`${LOCAL_ROOT_URL}/create-multiple-payments/`, values, headers)
+    const res = await axios.post(`${ROOT_URL}/create-multiple-payments/`, values, headers)
     return {
         type: CREATE_PAYMENTS, 
         payload: res.data
@@ -131,7 +131,7 @@ export async function createMultiplePayments(values) {
 
 export async function fetchServices() {
     let headers = getHeaders()
-    let api_url = `${LOCAL_ROOT_URL}/services/`
+    let api_url = `${ROOT_URL}/services/`
     const res = await axios.get(api_url, headers)
     return {
         type: FETCH_SERVICES, 
@@ -141,7 +141,7 @@ export async function fetchServices() {
 
 export async function fetchCurrentPayment(payment_id) {
     let headers = getHeaders()
-    const res = await axios.get(`${LOCAL_ROOT_URL}/payments/${payment_id}/`, headers)
+    const res = await axios.get(`${ROOT_URL}/payments/${payment_id}/`, headers)
     return {
         type: FETCH_CURRENT_PAYMENT,
         payload: res.data
@@ -150,7 +150,7 @@ export async function fetchCurrentPayment(payment_id) {
 
 export async function updatePayment(payment_id, values) {
     let headers = getHeaders()
-    const res = await axios.put(`${LOCAL_ROOT_URL}/payments/${payment_id}/`, values, headers)
+    const res = await axios.put(`${ROOT_URL}/payments/${payment_id}/`, values, headers)
     return {
         type: FETCH_CURRENT_PAYMENT,
         payload: res.data
