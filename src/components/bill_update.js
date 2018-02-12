@@ -65,12 +65,6 @@ class BillUpdate extends Component {
                     component={this.renderField}
                 />
                 <Field 
-                    name="due_date"
-                    label="Due Date"
-                    type="text"
-                    component={this.renderField}
-                />
-                <Field 
                     name="service_name"
                     label="Service"
                     type="text"
@@ -87,10 +81,6 @@ function validate(values) {
 
     if (!values.name) {
         errors.name = <p className="form-errors">Enter name of bill</p>
-    }
-
-    if (!values.description) {
-        errors.description = <p className="form-errors">Enter a small description about the bill</p>
     }
 
     if (!values.service_name) {
