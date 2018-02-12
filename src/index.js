@@ -22,7 +22,6 @@ import BillUpdate from './components/bill_update'
 import PaymentNew from './components/payment_new'
 import PaymentUpdate from './components/payment_update'
 import Navbar from './components/navbar'
-import callAPI from './utils'
 
 import { ROOT_URL } from './const'
 
@@ -30,7 +29,6 @@ console.log('ROOT_URL: ', ROOT_URL)
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
 
-callAPI()
 
 ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>

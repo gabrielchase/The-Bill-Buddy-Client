@@ -4,8 +4,14 @@ import { connect } from 'react-redux'
 
 import { loginUser } from '../actions'
 
+import { callAPI } from '../utils'
+
 
 class UserLogin extends Component {
+    async componentWillMount() {
+        await callAPI()
+    }
+
     renderField(field) {
         return (
             <div>

@@ -5,7 +5,7 @@ import {PieChart, Pie, Legend, Tooltip, Cell } from 'recharts'
 import { fetchUser, sortPaymentsThisMonth } from '../actions'
 
 import { COLORS } from '../const'
-import { checkAuth } from '../utils'
+import { checkAuth, callAPI } from '../utils'
 
 import _ from 'lodash'
 
@@ -19,6 +19,7 @@ class Dashboard extends Component {
     }
 
     async componentWillMount() {
+        await callAPI()
         await checkAuth(this.props.history)
     }
     
