@@ -63,8 +63,18 @@ export async function updateUser(values) {
 
 export async function loginUser(values) {
     const res = await axios.post(`${ROOT_URL}/login/`, values)
-    await localStorage.setItem('user_id', res.data.user_id)
-    await localStorage.setItem('jwt', res.data.token)
+    
+    let now = new Date()
+    var next_week = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
+    
+    let creation = Math.round(now.getTime() / 1000)
+    let expiration = Math.round(next_week.getTime() / 1000)
+
+    localStorage.setItem('user_id', res.data.user_id)
+    localStorage.setItem('jwt', res.data.token)
+    localStorage.setItem('jwt_creation', creation)
+    localStorage.setItem('jwt_expiration', expiration)
+
     return {
         type: LOGIN_USER_SUCCESS, 
         payload: res.data
