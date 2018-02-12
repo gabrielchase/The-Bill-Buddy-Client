@@ -167,7 +167,8 @@ class PaymentNew extends Component {
 
                 <div className="row">
                     <div className="column column-20">
-                        <label htmlFor="" id="radio-label">Payment Type: </label>
+                        <label htmlFor="" id="radio-label">Payment Type </label>
+                        <br/>
                     </div>
                     <div className="column column-50">
                         <input id="single" name="payment-type" type="radio" onClick={() => this.setState({'paymentType': 'Single'})}/>
