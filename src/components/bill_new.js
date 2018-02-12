@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { createBill } from '../actions'
 
-import checkAuth from '../utils'
+import { checkAuth } from '../utils'
 
 import _ from 'lodash'
 

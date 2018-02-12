@@ -5,7 +5,7 @@ import {PieChart, Pie, Legend, Tooltip, Cell } from 'recharts'
 import { fetchUser, sortPaymentsThisMonth } from '../actions'
 
 import { COLORS } from '../const'
-import checkAuth from '../utils'
+import { checkAuth } from '../utils'
 
 import _ from 'lodash'
 

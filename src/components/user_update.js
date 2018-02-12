@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { fetchUser, updateUser } from '../actions'
 
-import checkAuth from '../utils'
+import { checkAuth } from '../utils'
 
 
 class UserUpdate extends Component {

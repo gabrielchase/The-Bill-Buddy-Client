@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom'
 
 import { fetchCurrentBill, sortBillPayments } from '../actions'
 
-import checkAuth from '../utils'
+import { checkAuth } from '../utils'
 
 import _ from 'lodash'
 

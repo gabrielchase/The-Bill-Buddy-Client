@@ -4,7 +4,7 @@ import { connect } from 'react-redux'
 
 import { fetchCurrentBill, updateBill } from '../actions'
 
-import checkAuth from '../utils'
+import { checkAuth } from '../utils'
 
 
 class BillUpdate extends Component {

@@ -5,7 +5,7 @@ import { connect } from 'react-redux'
 import { fetchBills, createPayment, createMultiplePayments } from '../actions'
 
 import CheckboxGroup  from './checkbox_group'
-import checkAuth from '../utils'
+import { checkAuth } from '../utils'
 
 import { MONTHS, DAYS } from '../const'
 
