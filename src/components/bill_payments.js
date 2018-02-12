@@ -65,7 +65,7 @@ class BillPayments extends Component {
                     <Link className="button" to={edit_url}>Edit Bill</Link>
                 </div>
                 <h1>{current_bill.name} Payments</h1>
-                <h4>Description: {current_bill.description}</h4>
+                <h4>{current_bill.description ? `Description: ${current_bill.description}` : ''}</h4>
                 <h4>Service: {current_bill.instance_service_name}</h4>
                 <br/>
                 <table>
