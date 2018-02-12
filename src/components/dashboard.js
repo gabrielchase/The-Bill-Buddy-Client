@@ -2,9 +2,10 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {PieChart, Pie, Legend, Tooltip, Cell } from 'recharts'
 
-import { COLORS } from '../const'
-
 import { fetchUser, sortPaymentsThisMonth } from '../actions'
+
+import { COLORS } from '../const'
+import checkAuth from '../utils'
 
 import _ from 'lodash'
 
@@ -15,6 +16,10 @@ class Dashboard extends Component {
         this.state = {
             'sortAscend': false
         }
+    }
+
+    async componentWillMount() {
+        await checkAuth(this.props.history)
     }
     
     async componentDidMount() {

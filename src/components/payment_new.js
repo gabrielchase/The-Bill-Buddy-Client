@@ -5,6 +5,7 @@ import { connect } from 'react-redux'
 import { fetchBills, createPayment, createMultiplePayments } from '../actions'
 
 import CheckboxGroup  from './checkbox_group'
+import checkAuth from '../utils'
 
 import { MONTHS, DAYS } from '../const'
 
@@ -19,6 +20,10 @@ class PaymentNew extends Component {
             'statusValue': '',
             'paymentType': ''
         }
+    }
+    
+    async componentWillMount() {
+        await checkAuth(this.props.history)
     }
     
     async componentDidMount() {

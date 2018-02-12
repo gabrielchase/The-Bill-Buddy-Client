@@ -4,11 +4,17 @@ import { connect } from 'react-redux'
 
 import { fetchUser, updateUser } from '../actions'
 
+import checkAuth from '../utils'
+
 
 class UserUpdate extends Component {
     async componentDidMount() {
         await this.props.fetchUser()
         await this.handleInitialize()
+    }
+
+    async componentWillMount() {
+        await checkAuth(this.props.history)
     }
 
     handleInitialize() {

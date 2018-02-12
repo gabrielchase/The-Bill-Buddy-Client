@@ -4,10 +4,16 @@ import { Link } from 'react-router-dom'
 
 import { fetchServices } from '../actions'
 
+import checkAuth from '../utils'
+
 import _ from 'lodash'
 
 
 class BillIndex extends Component {
+    async componentWillMount() {
+        await checkAuth(this.props.history)
+    }
+
     async componentDidMount() {
         await this.props.fetchServices()
     }

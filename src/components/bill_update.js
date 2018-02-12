@@ -4,8 +4,14 @@ import { connect } from 'react-redux'
 
 import { fetchCurrentBill, updateBill } from '../actions'
 
+import checkAuth from '../utils'
+
 
 class BillUpdate extends Component {
+    async componentWillMount() {
+        await checkAuth(this.props.history)
+    }
+
     async componentDidMount() {
         let { bill_id } = this.props.match.params
         await this.props.fetchCurrentBill(bill_id)

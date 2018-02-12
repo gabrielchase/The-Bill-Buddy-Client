@@ -4,10 +4,16 @@ import { connect } from 'react-redux'
 
 import { createBill } from '../actions'
 
+import checkAuth from '../utils'
+
 import _ from 'lodash'
 
 
 class BillNew extends Component {
+    async componentWillMount() {
+        await checkAuth(this.props.history)
+    }
+
     renderField(field) {
         return (
             <div>

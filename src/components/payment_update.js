@@ -4,6 +4,8 @@ import { connect } from 'react-redux'
 
 import { fetchCurrentPayment, updatePayment } from '../actions'
 
+import checkAuth from '../utils'
+
 
 class PaymentUpdate extends Component {
     constructor(props) {
@@ -11,6 +13,10 @@ class PaymentUpdate extends Component {
         this.state = {
             'statusValue': null
         }
+    }
+
+    async componentWillMount() {
+        await checkAuth(this.props.history)
     }
     
     async componentDidMount() {
