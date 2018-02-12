@@ -8,9 +8,6 @@ import { createStore, applyMiddleware } from 'redux'
 import { BrowserRouter, Route, Switch } from 'react-router-dom'
 import promise from 'redux-promise'
 
-import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider'
-import injectTapEventPlugin from 'react-tap-event-plugin'
-
 import reducers from './reducers'
 
 import LandingPage from './components/landing_page'
@@ -25,40 +22,39 @@ import BillUpdate from './components/bill_update'
 import PaymentNew from './components/payment_new'
 import PaymentUpdate from './components/payment_update'
 import Navbar from './components/navbar'
+import callAPI from './utils'
 
 import { ROOT_URL } from './const'
 
 console.log('ROOT_URL: ', ROOT_URL)
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
-injectTapEventPlugin()
 
+callAPI()
 
 ReactDOM.render(
     <Provider store={createStoreWithMiddleware(reducers)}>
-        <MuiThemeProvider>
-            <BrowserRouter>
-                <div>
-                    <Navbar />
-                    <br/>
-                    <div className="container">
-                        <Switch>
-                            <Route path="/bills/:bill_id/payments/:payment_id/edit" component={PaymentUpdate} />
-                            <Route path="/bills/:bill_id/payments" component={BillPayments} />
-                            <Route path="/bills/new" component={BillNew} />
-                            <Route path="/bills/edit/:bill_id" component={BillUpdate} />
-                            <Route path="/bills" component={BillIndex} />
-                            <Route path="/payment/new" component={PaymentNew} />
-                            <Route path="/profile/edit" component={UserUpdate} />
-                            <Route path="/register" component={UserCreate} />
-                            <Route path="/login" component={UserLogin} />
-                            <Route path="/dashboard" component={Dashboard} />
-                            <Route path="" component={LandingPage} />
-                        </Switch>
-                    </div>
+        <BrowserRouter>
+            <div>
+                <Navbar />
+                <br/>
+                <div className="container">
+                    <Switch>
+                        <Route path="/bills/:bill_id/payments/:payment_id/edit" component={PaymentUpdate} />
+                        <Route path="/bills/:bill_id/payments" component={BillPayments} />
+                        <Route path="/bills/new" component={BillNew} />
+                        <Route path="/bills/edit/:bill_id" component={BillUpdate} />
+                        <Route path="/bills" component={BillIndex} />
+                        <Route path="/payment/new" component={PaymentNew} />
+                        <Route path="/profile/edit" component={UserUpdate} />
+                        <Route path="/register" component={UserCreate} />
+                        <Route path="/login" component={UserLogin} />
+                        <Route path="/dashboard" component={Dashboard} />
+                        <Route path="" component={LandingPage} />
+                    </Switch>
                 </div>
-            </BrowserRouter>
-        </MuiThemeProvider>
+            </div>
+        </BrowserRouter>
     </Provider>,
 document.getElementById('root'));
 registerServiceWorker();
