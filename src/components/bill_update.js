@@ -27,7 +27,7 @@ class BillUpdate extends Component {
           'service_name': current_bill.instance_service_name,
         }
         this.props.initialize(initial_values);
-      }
+    }
 
     renderField(field) {
         return (
@@ -36,6 +36,16 @@ class BillUpdate extends Component {
                 <input type={field.type}
                     { ...field.input }
                 />
+                {field.meta.touched ? field.meta.error : ''}
+            </div>
+        )
+    }
+
+    renderTextarea(field) {
+        return (
+            <div>
+                <label htmlFor="">{field.label}</label>
+                <textarea name={field.name} id="" cols="" rows="" {...field.input}></textarea>
                 {field.meta.touched ? field.meta.error : ''}
             </div>
         )
@@ -59,16 +69,16 @@ class BillUpdate extends Component {
                     component={this.renderField}
                 />
                 <Field 
-                    name="description"
-                    label="Description"
+                    name="service_name"
+                    label="Company / Category"
                     type="text"
                     component={this.renderField}
                 />
                 <Field 
-                    name="service_name"
-                    label="Service"
+                    name="description"
+                    label="Description"
                     type="text"
-                    component={this.renderField}
+                    component={this.renderTextarea}
                 />
                 <button type="submit">Submit</button>
             </form>

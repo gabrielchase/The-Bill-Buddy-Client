@@ -25,6 +25,16 @@ class BillNew extends Component {
             </div>
         )
     }
+
+    renderTextarea(field) {
+        return (
+            <div>
+                <label htmlFor="">{field.label}</label>
+                <textarea name={field.name} id="" cols="" rows="" {...field.input}></textarea>
+                {field.meta.touched ? field.meta.error : ''}
+            </div>
+        )
+    }
  
     async onSubmit(values) {
         let service_name = values.service_name.toLowerCase()
@@ -55,7 +65,7 @@ class BillNew extends Component {
                     name="description"
                     label="Description"
                     type="text"
-                    component={this.renderField}
+                    component={this.renderTextarea}
                 />
                 <button type="submit">Submit</button>
             </form>
