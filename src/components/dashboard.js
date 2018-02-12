@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import {PieChart, Pie, Legend, Tooltip, Cell } from 'recharts'
+import { Link } from 'react-router-dom'
 
 import { fetchUser, sortPaymentsThisMonth } from '../actions'
 
@@ -37,16 +38,17 @@ class Dashboard extends Component {
         let { user: { payments_this_month } } = this.props
         return (
             _.map(payments_this_month, (payment, idx) => {
+                let payment_url = `/bills/${payment.bill_id}/payments/${payment.id}/edit`
                 return (
                     <tr key={payment.id}>
-                        <td>{idx+1}</td>
+                        <td><Link to={payment_url}>{idx+1}</Link></td>
                         <td>{payment.due_date}</td>
                         <td>{payment.service}</td>
                         <td>{payment.bill_name}</td>
                         <td>{payment.status}</td>
                         <td>{payment.amount}</td>
                     </tr>
-                )
+                ) 
             })
         )
     }
