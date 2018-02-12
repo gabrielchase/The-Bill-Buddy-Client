@@ -67,6 +67,12 @@ class BillPayments extends Component {
                 <h1>{current_bill.name} Payments</h1>
                 <h4>{current_bill.description ? `Description: ${current_bill.description}` : ''}</h4>
                 <h4>Service: {current_bill.instance_service_name}</h4>
+                <h4>
+                    {current_bill.total_bill_info ? `Lifetime Payment: ${current_bill.total_bill_info.lifetime_payment}` : ''}
+                </h4>
+                <h4>
+                    {current_bill.total_bill_info ? `Payments This Year: ${current_bill.total_bill_info.payments_this_year}` : ''}
+                </h4>
                 <br/>
                 <table>
                     <thead>

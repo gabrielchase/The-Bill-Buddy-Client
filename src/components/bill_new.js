@@ -45,7 +45,7 @@ class BillNew extends Component {
     }
 
     render() {
-        const { handleSubmit} = this.props
+        const { handleSubmit } = this.props
         return(
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <h1>Add a Bill</h1>
