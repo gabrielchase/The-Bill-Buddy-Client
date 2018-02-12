@@ -28,9 +28,8 @@ class BillNew extends Component {
  
     async onSubmit(values) {
         let service_name = values.service_name.toLowerCase()
-        service_name = service_name.charAt(0).toUpperCase() + service_name.slice(1)
-        
-        values.service_name = service_name
+        values.service_name = service_name.charAt(0).toUpperCase() + service_name.slice(1)
+
         await this.props.createBill(values)
         await this.props.history.push('/bills')
     }
@@ -47,14 +46,14 @@ class BillNew extends Component {
                     component={this.renderField}
                 />
                 <Field 
-                    name="description"
-                    label="Description"
+                    name="service_name"
+                    label="Company / Category"
                     type="text"
                     component={this.renderField}
                 />
                 <Field 
-                    name="service_name"
-                    label="Service"
+                    name="description"
+                    label="Description"
                     type="text"
                     component={this.renderField}
                 />
@@ -71,12 +70,8 @@ function validate(values) {
         errors.name = <p className="form-errors">Enter name of bill</p>
     }
 
-    if (!values.description) {
-        errors.description = <p className="form-errors">Enter a small description about the bill</p>
-    }
-
     if (!values.service_name) {
-        errors.service = <p className="form-errors">Please fill this up to better track your bills</p>
+        errors.service = <p className="form-errors">Put the company or category of this bill</p>
     }
 
     return errors
