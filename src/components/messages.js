@@ -12,10 +12,6 @@ class Messages extends Component {
                     <li className="message" key={idx}>{message}</li>
                 )
             })
-        } else {
-            return (
-                <li></li>
-            )
         }
     }
 
