@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
-import {PieChart, Pie, Legend, Tooltip, Cell } from 'recharts'
+import { PieChart, Pie, Legend, Tooltip, Cell } from 'recharts'
 import { Link } from 'react-router-dom'
 
 import { fetchUser, sortPaymentsThisMonth, addMessage, removeMessages } from '../actions'
