@@ -1,17 +1,42 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+
+import _ from 'lodash'
 
 
 class Messages extends Component {
+    renderMessages() {
+        if (this.props.messages.length != 0) {
+            return _.map(this.props.messages, (message, idx) => {
+                return (
+                    <li className="message" key={idx}>{message}</li>
+                )
+            })
+        } else {
+            return (
+                <li></li>
+            )
+        }
+    }
+
     render() {
         return (
             <div className="container">
                 <br/>
                 <div className="center-text">
-                    <h3>Message</h3>
+                    <ul className="messages">
+                        {this.renderMessages()}
+                    </ul>
                 </div>  
             </div>
         )
     }
 }
 
-export default Messages
+function mapStateToProps(state) {
+    return { 
+        messages: state.messages,
+    }
+}
+
+export default connect(mapStateToProps, {})(Messages)
