@@ -37,7 +37,7 @@ class BillPayments extends Component {
         if (current_bill) {
             return _.map(current_bill.payments, (payment, idx) => {
                 let payment_url = `/bills/${current_bill.id}/payments/${payment.id}/edit`
-                return(
+                return (
                     <tr key={payment.id}>
                         <td><Link to={payment_url}>{idx+1}</Link></td>
                         <td>{payment.amount}</td>
@@ -53,7 +53,6 @@ class BillPayments extends Component {
                 <tr></tr>
             )
         }
-        
     }
 
     render() {

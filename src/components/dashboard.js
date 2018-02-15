@@ -22,9 +22,7 @@ class Dashboard extends Component {
     async componentWillMount() {
         await callAPI()
         await checkAuth(this.props.history)
-        console.log('-----------')
         await this.props.addMessage('In Dashboard')
-        console.log('-----------')
     }
     
     async componentDidMount() {
