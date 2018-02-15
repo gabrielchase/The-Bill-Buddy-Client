@@ -3,7 +3,7 @@ import { connect } from 'react-redux'
 import {PieChart, Pie, Legend, Tooltip, Cell } from 'recharts'
 import { Link } from 'react-router-dom'
 
-import { fetchUser, sortPaymentsThisMonth } from '../actions'
+import { fetchUser, sortPaymentsThisMonth, addMessage } from '../actions'
 
 import { COLORS } from '../const'
 import { checkAuth, callAPI } from '../utils'
@@ -22,6 +22,9 @@ class Dashboard extends Component {
     async componentWillMount() {
         await callAPI()
         await checkAuth(this.props.history)
+        console.log('-----------')
+        await addMessage('In Dashboard')
+        console.log('-----------')
     }
     
     async componentDidMount() {
@@ -123,8 +126,8 @@ class Dashboard extends Component {
 
 function mapStateToProps(state) {
     return { 
-        user: state.user
+        user: state.user,
     }
 }
 
-export default connect(mapStateToProps, { fetchUser, sortPaymentsThisMonth })(Dashboard)
+export default connect(mapStateToProps, { fetchUser, sortPaymentsThisMonth, addMessage })(Dashboard)

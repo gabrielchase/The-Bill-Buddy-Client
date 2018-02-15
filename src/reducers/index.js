@@ -8,6 +8,7 @@ import PaymentReducer from './reducer_payments'
 import CurrentBillReducer from './reducer_current_bill'
 import CurrentPaymentReducer from './reducer_current_payment'
 import ServiceReducer from './reducer_services'
+import MessageReducer from './reducer_messages'
 
 
 const rootReducer = combineReducers({
@@ -19,6 +20,7 @@ const rootReducer = combineReducers({
     payments: PaymentReducer,
     current_payment: CurrentPaymentReducer,
     services: ServiceReducer,
+    messages: MessageReducer
 })
 
 export default rootReducer

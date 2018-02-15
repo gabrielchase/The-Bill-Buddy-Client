@@ -22,6 +22,7 @@ import BillUpdate from './components/bill_update'
 import PaymentNew from './components/payment_new'
 import PaymentUpdate from './components/payment_update'
 import Navbar from './components/navbar'
+import Messages from './components/messages'
 
 import { checkJWTExpiration } from './utils'
 import { ROOT_URL } from './const'
@@ -37,6 +38,7 @@ ReactDOM.render(
         <BrowserRouter>
             <div>
                 <Navbar />
+                <Messages />
                 <br/>
                 <div className="container">
                     <Switch>

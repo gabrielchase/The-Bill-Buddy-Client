@@ -23,6 +23,8 @@ export const FETCH_SERVICES = 'fetch_services'
 export const FETCH_CURRENT_PAYMENT = 'fetch_current_payment'
 export const UPDATE_PAYMENT = 'update_payment'
 
+export const ADD_MESSAGE = 'add_message'
+
 
 export function getHeaders() {
     return {
@@ -186,5 +188,13 @@ export async function sortPaymentsThisMonth(user, category, mode_bool) {
     return {
         type: SORT_USER_PAYMENTS, 
         payload: user
+    }
+}
+
+export async function addMessage(message) {
+    console.log('in addMessage action: ', message)
+    return {
+        type: ADD_MESSAGE,
+        payload: message
     }
 }
