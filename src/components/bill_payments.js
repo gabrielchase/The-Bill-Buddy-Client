@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { fetchCurrentBill, sortBillPayments } from '../actions'
+import { fetchCurrentBill, sortBillPayments, removeMessages } from '../actions'
 
 import { checkAuth } from '../utils'
 
@@ -91,6 +91,10 @@ class BillPayments extends Component {
             </div>
         )
     }
+
+    componentWillUnmount() {
+        this.props.removeMessages()
+    }
 }
 
 function mapStateToProps(state) {
@@ -99,4 +103,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { fetchCurrentBill, sortBillPayments })(BillPayments)
+export default connect(mapStateToProps, { fetchCurrentBill, sortBillPayments, removeMessages })(BillPayments)

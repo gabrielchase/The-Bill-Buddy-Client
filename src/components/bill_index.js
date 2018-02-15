@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { Link } from 'react-router-dom'
 
-import { fetchServices } from '../actions'
+import { fetchServices, removeMessages } from '../actions'
 
 import { checkAuth } from '../utils'
 
@@ -57,6 +57,10 @@ class BillIndex extends Component {
             </div>
         )
     }
+
+    componentWillUnmount() {
+        this.props.removeMessages()
+    }
 }
 
 function mapStateToProps(state) {
@@ -65,4 +69,4 @@ function mapStateToProps(state) {
     }
 }
 
-export default connect(mapStateToProps, { fetchServices })(BillIndex)
+export default connect(mapStateToProps, { fetchServices, removeMessages })(BillIndex)

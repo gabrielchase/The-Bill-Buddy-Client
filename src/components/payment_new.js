@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { fetchBills, createPayment, createMultiplePayments } from '../actions'
+import { fetchBills, createPayment, createMultiplePayments, addMessage } from '../actions'
 
 import CheckboxGroup  from './checkbox_group'
 import { checkAuth } from '../utils'
@@ -138,10 +138,12 @@ class PaymentNew extends Component {
 
         if (paymentType === 'Single') {
             await this.props.createPayment(values)
+            await this.props.addMessage('New payment added')
         } else if (paymentType === 'Multiple') {
             await this.props.createMultiplePayments(values)
+            await this.props.addMessage('New payments added')
         }
-        
+
         await this.props.history.push(`/bills/${bill.id}/payments`)
     }
 
@@ -271,6 +273,6 @@ export default reduxForm({
     validate,
     form: 'PaymentNewForm'
 })(
-    connect(mapStateToProps, { fetchBills, createPayment, createMultiplePayments })(PaymentNew)
+    connect(mapStateToProps, { fetchBills, createPayment, createMultiplePayments, addMessage })(PaymentNew)
 )
 

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { createBill } from '../actions'
+import { createBill, addMessage } from '../actions'
 
 import { checkAuth } from '../utils'
 
@@ -41,6 +41,7 @@ class BillNew extends Component {
         values.service_name = service_name.charAt(0).toUpperCase() + service_name.slice(1)
 
         await this.props.createBill(values)
+        await this.props.addMessage('New bill created')
         await this.props.history.push('/bills')
     }
 
@@ -91,5 +92,5 @@ export default reduxForm({
     validate,
     form: 'BillNewForm'
 })(
-    connect(null, { createBill })(BillNew)
+    connect(null, { createBill, addMessage })(BillNew)
 )

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { fetchUser, updateUser } from '../actions'
+import { fetchUser, updateUser, addMessage } from '../actions'
 
 import { checkAuth } from '../utils'
 
@@ -51,6 +51,7 @@ class UserUpdate extends Component {
         delete values.mobile_number
         
         await this.props.updateUser(values)
+        await this.props.addMessage('Profile successfully updated')
         await this.props.history.push('/dashboard')
     }
 
@@ -134,5 +135,5 @@ export default reduxForm({
     validate,
     form: 'UserUpdateForm'
 })(
-    connect(mapStateToProps, { fetchUser, updateUser })(UserUpdate)
+    connect(mapStateToProps, { fetchUser, updateUser, addMessage })(UserUpdate)
 )
