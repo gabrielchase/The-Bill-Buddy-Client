@@ -39,7 +39,6 @@ ReactDOM.render(
             <div>
                 <Navbar />
                 <Messages />
-                <br/>
                 <div className="container">
                     <Switch>
                         <Route path="/bills/:bill_id/payments/:payment_id/edit" component={PaymentUpdate} />
