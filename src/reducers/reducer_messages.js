@@ -1,4 +1,4 @@
-import { ADD_MESSAGE } from '../actions'
+import { ADD_MESSAGE, REMOVE_MESSAGES } from '../actions'
 
 
 export default function(state = [], action) {
@@ -8,6 +8,9 @@ export default function(state = [], action) {
         let new_state = state.concat(action.payload)
         console.log('new state: ', new_state)
         return new_state
+    case REMOVE_MESSAGES:
+        console.log('REMOVE_MESSAGES reducer')
+        return []
     default: 
         return state
     }

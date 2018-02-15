@@ -24,6 +24,7 @@ export const FETCH_CURRENT_PAYMENT = 'fetch_current_payment'
 export const UPDATE_PAYMENT = 'update_payment'
 
 export const ADD_MESSAGE = 'add_message'
+export const REMOVE_MESSAGES = 'remove_messages'
 
 
 export function getHeaders() {
@@ -196,5 +197,12 @@ export async function addMessage(message) {
     return {
         type: ADD_MESSAGE,
         payload: message
+    }
+}
+
+export async function removeMessages() {
+    console.log('removeMessages action')
+    return {
+        type: REMOVE_MESSAGES
     }
 }
