@@ -93,10 +93,14 @@ class PaymentUpdate extends Component {
     }
     
     render() {
-        let { handleSubmit } = this.props
+        let { handleSubmit, current_payment } = this.props
+
         return(
             <form onSubmit={handleSubmit(this.onSubmit.bind(this))}>
                 <h1>Edit Payment</h1>
+                <h4>{current_payment.bill_name ? `Bill: ${current_payment.bill_name}`: ''}</h4>
+                <h4>{current_payment.service ? `Service: ${current_payment.service.name}`: ''}</h4>
+                
                 <div className="row">
                     <div className="column column-50">
                         <Field 
