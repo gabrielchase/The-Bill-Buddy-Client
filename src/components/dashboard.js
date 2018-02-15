@@ -23,7 +23,7 @@ class Dashboard extends Component {
         await callAPI()
         await checkAuth(this.props.history)
         console.log('-----------')
-        await addMessage('In Dashboard')
+        await this.props.addMessage('In Dashboard')
         console.log('-----------')
     }
     
