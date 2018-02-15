@@ -2,4 +2,4 @@
 
 A web application to help manage, organize, and visualize your bills and payments.
 
-thebillbuddy.herokuapp.com
+https://thebillbuddy.herokuapp.com
