@@ -27,8 +27,6 @@ import Messages from './components/messages'
 import { checkJWTExpiration } from './utils'
 import { ROOT_URL } from './const'
 
-console.log('ROOT_URL: ', ROOT_URL)
-
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore)
 
 checkJWTExpiration()

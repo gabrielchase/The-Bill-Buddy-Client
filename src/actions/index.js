@@ -193,7 +193,6 @@ export async function sortPaymentsThisMonth(user, category, mode_bool) {
 }
 
 export async function addMessage(message) {
-    console.log('in addMessage action: ', message)
     return {
         type: ADD_MESSAGE,
         payload: message
@@ -201,7 +200,6 @@ export async function addMessage(message) {
 }
 
 export async function removeMessages() {
-    console.log('removeMessages action')
     return {
         type: REMOVE_MESSAGES
     }

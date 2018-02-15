@@ -9,7 +9,6 @@ export const checkAuth = (history) => {
 }
 
 export const callAPI = () => {
-    console.log('calling API')
     axios.get(ROOT_URL)
 }
 
