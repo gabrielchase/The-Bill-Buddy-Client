@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { loginUser } from '../actions'
+import { loginUser, addMessage } from '../actions'
 
 import { callAPI } from '../utils'
 
@@ -26,6 +26,7 @@ class UserLogin extends Component {
 
     async onSubmit(values) {
         await this.props.loginUser(values)
+        await this.props.addMessage('Login successful')
         await this.props.history.push('/dashboard')
     }
 
@@ -70,5 +71,5 @@ export default reduxForm({
     validate,
     form: 'UserLoginForm'
 })(
-    connect(null, { loginUser })(UserLogin)
+    connect(null, { loginUser, addMessage })(UserLogin)
 )
