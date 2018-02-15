@@ -17,7 +17,7 @@ class Navbar extends Component {
                     <li><Link to="/bills/new">New Bill</Link></li>
                     <li><Link to="/payment/new">New Payment</Link></li>
                     <div className="float-right">
-                        <li><Link to="/profile/edit">Edit User</Link></li>
+                        <li><Link to="/profile/edit">Update Profile</Link></li>
                         <li><a href="/" onClick={this.handleLogout.bind(this)}>Logout</a></li>
                     </div>
                 </div>
