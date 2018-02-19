@@ -6,10 +6,11 @@ import _ from 'lodash'
 
 class Messages extends Component {
     renderMessages() {
-        if (this.props.messages.length != 0) {
+        if (this.props.messages.length !== 0) {
             return _.map(this.props.messages, (message, idx) => {
+                let className = `message-${message.type}`
                 return (
-                    <li className="message" key={idx}>{message}</li>
+                    <li className={className} key={idx}>{message.message}</li>
                 )
             })
         }

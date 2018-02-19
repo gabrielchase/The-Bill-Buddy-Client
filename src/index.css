@@ -121,7 +121,7 @@ html * {
     padding-right: 50px;
 }
 
-.message {
+.message-success {
     color: green;
     border: 1px solid;
     padding-top: 10px;
@@ -131,6 +131,19 @@ html * {
     border-radius: 10px;
     font-size: 18px;
     background-color: #F2FEEF;
+}
+
+
+.message-failure {
+    color: red;
+    border: 1px solid;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    width: 60%;
+    margin: 0 auto;
+    border-radius: 10px;
+    font-size: 18px;
+    background-color: #FFE4E4;
 }
 
 .use {

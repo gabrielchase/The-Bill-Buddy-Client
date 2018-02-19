@@ -75,7 +75,6 @@ class Dashboard extends Component {
 
     render() {
         let { user } = this.props
-        console.log(user)
         let piechart_data = []
         
         for (let key in user.expenditure_this_year) {
