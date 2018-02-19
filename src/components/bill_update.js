@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { fetchCurrentBill, updateBill, addMessage } from '../actions'
+import { fetchCurrentBill, updateBill, addMessage, SUCCESS } from '../actions'
 
 import { checkAuth } from '../utils'
 
@@ -54,7 +54,7 @@ class BillUpdate extends Component {
     async onSubmit(values) {
         let { bill_id } = this.props.match.params
         await this.props.updateBill(bill_id, values)
-        await this.props.addMessage('Bill successfully updated')
+        await this.props.addMessage('Bill successfully updated', SUCCESS)
         await this.props.history.push(`/bills/${bill_id}/payments`)
     }
 

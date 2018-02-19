@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { fetchUser, updateUser, addMessage } from '../actions'
+import { fetchUser, updateUser, addMessage, SUCCESS } from '../actions'
 
 import { checkAuth } from '../utils'
 
@@ -51,7 +51,7 @@ class UserUpdate extends Component {
         delete values.mobile_number
         
         await this.props.updateUser(values)
-        await this.props.addMessage('Profile successfully updated')
+        await this.props.addMessage('Profile successfully updated', SUCCESS)
         await this.props.history.push('/dashboard')
     }
 

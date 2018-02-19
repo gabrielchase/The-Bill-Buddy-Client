@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { fetchBills, createPayment, createMultiplePayments, addMessage } from '../actions'
+import { fetchBills, createPayment, createMultiplePayments, addMessage, SUCCESS } from '../actions'
 
 import CheckboxGroup  from './checkbox_group'
 import { checkAuth } from '../utils'
@@ -138,10 +138,10 @@ class PaymentNew extends Component {
 
         if (paymentType === 'Single') {
             await this.props.createPayment(values)
-            await this.props.addMessage('New payment added')
+            await this.props.addMessage('New payment added', SUCCESS)
         } else if (paymentType === 'Multiple') {
             await this.props.createMultiplePayments(values)
-            await this.props.addMessage('New payments added')
+            await this.props.addMessage('New payments added', SUCCESS)
         }
 
         await this.props.history.push(`/bills/${bill.id}/payments`)
