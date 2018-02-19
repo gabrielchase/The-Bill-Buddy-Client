@@ -2,7 +2,10 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { createUser } from '../actions'
+import { 
+    CREATE_USER_SUCCESS, CREATE_USER_FAILURE, 
+    SUCCESS, FAILURE,
+    createUser, addMessage, removeMessages } from '../actions'
 
 import { callAPI } from '../utils'
 
@@ -25,6 +28,7 @@ class UserCreate extends Component {
     }
 
     async onSubmit(values) {
+        this.props.removeMessages()
         if (values.password === values.confirm_password) {
             values.details = {
                 country: values.country,
@@ -34,14 +38,20 @@ class UserCreate extends Component {
             delete values.country
             delete values.mobile_number
 
+            let res = await this.props.createUser(values)
 
-            await this.props.createUser(values)
-            await this.props.history.push('/login')
+            switch(res.type) {
+                case CREATE_USER_SUCCESS:
+                    await this.props.addMessage(res.payload.message, SUCCESS)
+                    await this.props.history.push('/login')
+                    break
+                case CREATE_USER_FAILURE:
+                    await this.props.addMessage(res.payload.message, FAILURE)
+                    break
+            }
         } else {
-            // Print error here
-            console.log('Passwords do not match')
+            await this.props.addMessage('Passwords do not match', FAILURE)
         }
-        
     }
 
     render() {
@@ -124,5 +134,5 @@ export default reduxForm({
     validate,
     form: 'UserCreateForm'
 })(
-    connect(null, { createUser })(UserCreate)
+    connect(null, { createUser, addMessage, removeMessages })(UserCreate)
 )

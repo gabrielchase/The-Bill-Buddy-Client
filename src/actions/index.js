@@ -8,7 +8,8 @@ export const FAILURE = 'failure'
 export const LOGIN_USER_SUCCESS = 'login_user_success'
 export const LOGIN_USER_FAILURE = 'login_user_failure'
 
-export const CREATE_USER = 'create_user'
+export const CREATE_USER_SUCCESS = 'create_user_success'
+export const CREATE_USER_FAILURE = 'create_user_failure'
 export const FETCH_USER = 'fetch_user'
 export const SORT_USER_PAYMENTS = 'sort_user_payments'
 
@@ -53,10 +54,17 @@ export async function removeMessages() {
 }
 
 export async function createUser(values) {
-    const res = await axios.post(`${ROOT_URL}/users/`, values)
-    return {
-        type: CREATE_USER, 
-        payload: res.data
+    try {
+        const res = await axios.post(`${ROOT_URL}/users/`, values)
+        return {
+            type: CREATE_USER_SUCCESS, 
+            payload: {info: res.data, message: 'Successfully registered user'}
+        }    
+    } catch (error) {
+        return {
+            type: CREATE_USER_FAILURE, 
+            payload: {info: {}, message: 'Invalid information given'}
+        }    
     }
 }
 

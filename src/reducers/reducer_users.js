@@ -1,9 +1,13 @@
-import { CREATE_USER, FETCH_USER, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, SORT_USER_PAYMENTS } from '../actions'
+import { 
+    CREATE_USER_SUCCESS, CREATE_USER_FAILURE, 
+    FETCH_USER, SORT_USER_PAYMENTS } from '../actions'
 
 
 export default function(state = {}, action) {
     switch(action.type) {
-    case CREATE_USER: 
+    case CREATE_USER_SUCCESS: 
+        return action.payload
+    case CREATE_USER_FAILURE: 
         return action.payload
     case FETCH_USER:
         return action.payload
