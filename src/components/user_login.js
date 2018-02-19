@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import { Field, reduxForm } from 'redux-form'
 import { connect } from 'react-redux'
 
-import { loginUser, addMessage } from '../actions'
+import { loginUser, addMessage, removeMessages, LOGIN_USER_SUCCESS, LOGIN_USER_FAILURE, SUCCESS, FAILURE } from '../actions'
 
 import { callAPI } from '../utils'
 
@@ -25,9 +25,19 @@ class UserLogin extends Component {
     }
 
     async onSubmit(values) {
-        await this.props.loginUser(values)
-        await this.props.addMessage('Login successful')
-        await this.props.history.push('/dashboard')
+        await this.props.removeMessages()
+        let status = await this.props.loginUser(values)
+        switch(status.type) {
+            case LOGIN_USER_SUCCESS:
+                await this.props.addMessage('Login Successful', SUCCESS)
+                await this.props.history.push('/dashboard')
+                break
+            case LOGIN_USER_FAILURE:
+                await this.props.addMessage(status.payload, FAILURE)
+                break
+            default:
+                await this.props.addMessage('Invalid email or password', FAILURE)
+        }
     }
 
     render() {
@@ -71,5 +81,5 @@ export default reduxForm({
     validate,
     form: 'UserLoginForm'
 })(
-    connect(null, { loginUser, addMessage })(UserLogin)
+    connect(null, { loginUser, addMessage, removeMessages })(UserLogin)
 )
