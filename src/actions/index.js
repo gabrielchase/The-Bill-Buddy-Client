@@ -2,6 +2,9 @@ import axios from 'axios'
 import _ from 'lodash'
 import { ROOT_URL } from '../const'
 
+export const SUCCESS = 'success'
+export const FAILURE = 'failure'
+
 export const LOGIN_USER_SUCCESS = 'login_user_success'
 export const LOGIN_USER_FAILURE = 'login_user_failure'
 
@@ -36,6 +39,19 @@ export function getHeaders() {
     }
 }
 
+export async function addMessage(message, type) {
+    return {
+        type: ADD_MESSAGE,
+        payload: { message: message, type: type }
+    }
+}
+
+export async function removeMessages() {
+    return {
+        type: REMOVE_MESSAGES
+    }
+}
+
 export async function createUser(values) {
     const res = await axios.post(`${ROOT_URL}/users/`, values)
     return {
@@ -65,22 +81,29 @@ export async function updateUser(values) {
 }
 
 export async function loginUser(values) {
-    const res = await axios.post(`${ROOT_URL}/login/`, values)
+    try {
+        const res = await axios.post(`${ROOT_URL}/login/`, values)
     
-    let now = new Date()
-    var next_week = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
-    
-    let creation = Math.round(now.getTime() / 1000)
-    let expiration = Math.round(next_week.getTime() / 1000)
 
-    localStorage.setItem('user_id', res.data.user_id)
-    localStorage.setItem('jwt', res.data.token)
-    localStorage.setItem('jwt_creation', creation)
-    localStorage.setItem('jwt_expiration', expiration)
+        let now = new Date()
+        var next_week = new Date(now.getTime() + 7 * 24 * 60 * 60 * 1000)
+        let creation = Math.round(now.getTime() / 1000)
+        let expiration = Math.round(next_week.getTime() / 1000)
 
-    return {
-        type: LOGIN_USER_SUCCESS, 
-        payload: res.data
+        localStorage.setItem('user_id', res.data.user_id)
+        localStorage.setItem('jwt', res.data.token)
+        localStorage.setItem('jwt_creation', creation)
+        localStorage.setItem('jwt_expiration', expiration)
+        
+        return {
+            type: LOGIN_USER_SUCCESS,
+            payload: res.data
+        }    
+    } catch (error) {
+        return {
+            type: LOGIN_USER_FAILURE,
+            payload: 'Invalid email or password'
+        }    
     }
 }
 
@@ -189,18 +212,5 @@ export async function sortPaymentsThisMonth(user, category, mode_bool) {
     return {
         type: SORT_USER_PAYMENTS, 
         payload: user
-    }
-}
-
-export async function addMessage(message) {
-    return {
-        type: ADD_MESSAGE,
-        payload: message
-    }
-}
-
-export async function removeMessages() {
-    return {
-        type: REMOVE_MESSAGES
     }
 }
